@@ -1,33 +1,40 @@
 <template>
   <div class="card has-text-left">
-  <div class="card-content">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img class="is-rounded" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-        </figure>
-      </div>
-      <div class="media-content">
-        <p class="subtitle is-6">@username</p>
-        <p class="title is-7">Sample Message</p>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <avatar :image="message"/>
+        </div>
+        <div class="media-content">
+          <message-title :text="message"/>
+          <message-description :text="message" />
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-export default {
+import Avatar from "@/components/message/Avatar.vue";
+import MessageTitle from "@/components/message/MessageTitle.vue";
+import MessageDescription from "@/components/message/MessageDescription.vue";
 
-}
+export default {
+  name: "ChatMessage",
+  props: ["message"],
+  components: {
+    Avatar,
+    MessageTitle,
+    MessageDescription
+  },
+};
 </script>
 
 <style scoped>
-.card{
-    box-shadow: none
+.card {
+  box-shadow: none;
 }
-.card-content
-{
-    padding: 0.2rem 0.5rem;
+.card-content {
+  padding: 0.2rem 0.5rem;
 }
 </style>

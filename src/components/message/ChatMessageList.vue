@@ -1,14 +1,9 @@
 <template>
   <div class="list-group-wrapper">
-    <transition name="fade">
-      <div class="loading" v-show="loading">
-        <span class="fa fa-spinner fa-spin"></span> Loading
-      </div>
-    </transition>
     <ul class="list-group" id="infinite-list">
       <li class="list-group-item" v-for="message in messages" :key="message">
         <div class="card-content" style="padding: 0.5rem 0.5rem">
-          <chat-message />
+          <chat-message :message="message" />
         </div>
       </li>
     </ul>
@@ -37,6 +32,11 @@ export default {
 }
 
 .list-group {
+  overflow: auto;
+  height: 65vh;
+}
+
+.list-group-mobile {
   overflow: auto;
   height: 65vh;
 }
