@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="section">
-    <h1 class="title"> AMITY LIVE CHAT DEMO </h1>
+    <h1 class="title">AMITY LIVE CHAT DEMO</h1>
     <router-view />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div id="MessageDescription">
-    <p class="title is-7"> {{ text }} </p>
+    <p class="title is-7">{{ text }}</p>
   </div>
 </template>
 
@@ -11,5 +11,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

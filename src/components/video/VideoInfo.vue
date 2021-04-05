@@ -12,7 +12,9 @@
         </div>
         <div class="media-content has-text-left">
           <p class="title is-4">Demo Video Title</p>
-          <p class="subtitle is-6"><b-icon icon="eye" size="is-small"> </b-icon> 38</p>
+          <p class="subtitle is-6">
+            <b-icon icon="eye" size="is-small"> </b-icon> 38
+          </p>
         </div>
         <div class="block">
           <b-icon icon="star-circle"> </b-icon>
@@ -41,6 +43,6 @@ export default {};
 }
 
 .spaced {
-    padding: 0 1.5rem;
+  padding: 0 1.5rem;
 }
 </style>

@@ -3,10 +3,10 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <avatar :image="message"/>
+          <avatar :image="message" />
         </div>
         <div class="media-content">
-          <message-title :text="message"/>
+          <message-title :text="message" />
           <message-description :text="message" />
         </div>
       </div>
@@ -25,7 +25,7 @@ export default {
   components: {
     Avatar,
     MessageTitle,
-    MessageDescription
+    MessageDescription,
   },
 };
 </script>

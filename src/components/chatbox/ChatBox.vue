@@ -25,13 +25,12 @@ import ChatBoxHeader from "@/components/chatbox/ChatBoxHeader.vue";
 import ChatInput from "@/components/chatbox/ChatInput.vue";
 import ChatMessageList from "@/components/message/ChatMessageList.vue";
 
-
 export default {
   name: "ChatBox",
   components: {
     ChatBoxHeader,
     ChatInput,
-    ChatMessageList
+    ChatMessageList,
   },
   data() {
     return {
