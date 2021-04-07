@@ -1,6 +1,6 @@
 <template>
   <div id="MessageTitle">
-    <p class="subtitle is-6">{{ text }}</p>
+    <p class="subtitle is-6 spaced">{{ text }}</p>
   </div>
 </template>
 
@@ -11,4 +11,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.spaced {
+  padding-bottom: 0.5rem;
+}
+</style>

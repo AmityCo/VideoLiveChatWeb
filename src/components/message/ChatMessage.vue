@@ -3,11 +3,12 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <avatar :image="message" />
+          <avatar v-if="isAvatar" :image="message" />
+          <avatar v-else />
         </div>
         <div class="media-content">
-          <message-title :text="message" />
-          <message-description :text="message" />
+          <message-title :text="username" />
+          <message-description :text="message.data.text" />
         </div>
       </div>
     </div>
@@ -27,6 +28,20 @@ export default {
     MessageTitle,
     MessageDescription,
   },
+  computed: {
+    isAvatar: function() {
+      const user_model = this.message.user.model
+      return user_model.avatarFileId ? true : false
+    },
+    username: function () {
+      const user_model = this.message.user.model
+      if (user_model.displayName) {
+        return user_model.displayName
+      } else {
+        return user_model.userId
+      }
+    }
+  }
 };
 </script>
 
@@ -35,6 +50,6 @@ export default {
   box-shadow: none;
 }
 .card-content {
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.75rem;
 }
 </style>

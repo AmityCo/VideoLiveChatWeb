@@ -1,51 +1,68 @@
 <template>
-  <div class="list-group-wrapper">
-    <ul class="list-group" id="infinite-list">
-      <li class="list-group-item" v-for="message in messages" :key="message">
-        <div class="card-content" style="padding: 0.5rem 0.5rem">
-          <chat-message :message="message" />
-        </div>
-      </li>
-    </ul>
-  </div>
+  <DynamicScroller
+    ref="messagelist"
+    :items="messages_data"
+    :min-item-size="80"
+    class="scroller"
+    key-field="messageId"
+  >
+    <template v-slot="{ item }">
+        <chat-message :message="item" />
+    </template>
+  </DynamicScroller>
 </template>
 
 <script>
+import { DynamicScroller } from "vue-virtual-scroller";
+import { MessageRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+const messages = messageRepo.messagesForChannel({
+  channelId: "video-livechat",
+});
+
 import ChatMessage from "@/components/message/ChatMessage.vue";
 
 export default {
   name: "ChatMessageList",
   components: {
     ChatMessage,
+    DynamicScroller,
   },
   data() {
     return {
-      messages: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+      messages_data: [],
+      messages_demo: ["A", "B", "C", "D"],
     };
+  },
+  beforeCreate() {
+    messages.on("dataUpdated", (data) => {
+      // reload messages table
+      console.log("dataUpdated: ", data);
+
+      const filtered = data.filter( msg => !msg.isDeleted);
+      console.log("filtered: ", filtered);
+
+      this.messages_data = filtered.reverse();
+      this.$refs.messagelist.scrollToBottom();
+    });
+
+    messages.on("dataError", (error) => {
+      console.log(
+        "Message LiveCollections can not query/get/sync data from server",
+        error
+      );
+    });
+  },
+  beforeDestroy() {
+    // unobserve data changes once you are finished
+    messages.removeAllListeners("dataUpdated");
+    messages.removeAllListeners("dataError");
   },
 };
 </script>
 
 <style scoped>
-.list-group-wrapper {
-  position: relative;
-}
-
-.list-group {
-  overflow: auto;
+.scroller {
   height: 65vh;
-}
-
-.list-group-mobile {
-  overflow: auto;
-  height: 65vh;
-}
-
-.list-group-item {
-  margin-top: 1px;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 1px solid #e2e2e2;
 }
 </style>

@@ -6,14 +6,6 @@
       </template>
 
       <chat-message-list></chat-message-list>
-      <!-- <div
-        v-for="(message, index) in messages"
-        :key="index"
-        class="card-content"
-        style="padding: 0.5rem 0.5rem"
-      >
-        <chat-message />
-      </div> -->
 
       <chat-input />
     </b-collapse>
@@ -24,6 +16,9 @@
 import ChatBoxHeader from "@/components/chatbox/ChatBoxHeader.vue";
 import ChatInput from "@/components/chatbox/ChatInput.vue";
 import ChatMessageList from "@/components/message/ChatMessageList.vue";
+
+import { EkoChannelType, ChannelRepository } from "eko-sdk";
+const channelRepo = new ChannelRepository();
 
 export default {
   name: "ChatBox",
@@ -36,6 +31,15 @@ export default {
     return {
       messages: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
     };
+  },
+  mounted() {
+    const liveChannel = channelRepo.joinChannel({
+      channelId: "video-livechat",
+      type: EkoChannelType.Standard,
+    });
+    liveChannel.once("dataUpdated", (data) => {
+      console.log("channelRepo.joinChannel", data)
+    });
   },
 };
 </script>
