@@ -2,12 +2,12 @@
   <DynamicScroller
     ref="messagelist"
     :items="messages_data"
-    :min-item-size="80"
+    :min-item-size="90"
     class="scroller"
     key-field="messageId"
   >
     <template v-slot="{ item }">
-        <chat-message :message="item" />
+      <chat-message :message="item" />
     </template>
   </DynamicScroller>
 </template>
@@ -39,7 +39,7 @@ export default {
       // reload messages table
       console.log("dataUpdated: ", data);
 
-      const filtered = data.filter( msg => !msg.isDeleted);
+      const filtered = data.filter((msg) => !msg.isDeleted);
       console.log("filtered: ", filtered);
 
       this.messages_data = filtered.reverse();

@@ -13,6 +13,6 @@ export default {
 
 <style scoped>
 .spaced {
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 </style>

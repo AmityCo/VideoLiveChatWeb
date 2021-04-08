@@ -5,7 +5,7 @@
         <b-input
           rounded
           class="expanded"
-          placeholder="No label"
+          placeholder="Type Your Meassage Here"
           v-model="inputMessages"
           @keyup.native.enter="submitMessage"
         ></b-input>
@@ -31,19 +31,20 @@ export default {
     return {
       channel: "video-livechat",
       inputMessages: null,
-      model: null
     };
   },
   methods: {
     submitMessage: function () {
-      const messageLiveObject = messageRepo.createTextMessage({
-        channelId: this.channel,
-        text: this.inputMessages,
-      });
-      console.log(messageLiveObject);
-      this.inputMessages = null
+      if (this.inputMessages && this.inputMessages !== "") {
+        const messageLiveObject = messageRepo.createTextMessage({
+          channelId: this.channel,
+          text: this.inputMessages,
+        });
+        console.log(messageLiveObject);
+        this.inputMessages = null;
+      }
     },
-  }
+  },
 };
 </script>
 

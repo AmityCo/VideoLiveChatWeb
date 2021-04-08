@@ -11,10 +11,9 @@
 </template>
 
 <script>
-
 export default {
   name: "Avatar",
-  props: ["image"]
+  props: ["image"],
 };
 </script>
 

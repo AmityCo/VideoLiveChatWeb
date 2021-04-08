@@ -8,7 +8,23 @@
         </div>
         <div class="media-content">
           <message-title :text="username" />
-          <message-description :text="message.data.text" />
+          <!-- <message-description :text="message.data.text" /> -->
+          <b-tooltip
+            type="is-light"
+            :triggers="['click']"
+            :auto-close="['outside', 'escape']"
+          >
+            <template v-slot:content>
+              <b-icon icon="heart" type="is-danger" />
+              <span style="padding: 0.4rem" />
+              <b-icon icon="thumb-up" type="is-info" />
+              <span style="padding: 0.4rem" />
+              <b-icon icon="thumb-down" type="is-warning" />
+              <span style="padding: 0.4rem" />
+              <b-icon icon="emoticon-cool" />
+            </template>
+            <b-button :label="message.data.text" type="is-light" />
+          </b-tooltip>
         </div>
       </div>
     </div>
@@ -18,7 +34,7 @@
 <script>
 import Avatar from "@/components/message/Avatar.vue";
 import MessageTitle from "@/components/message/MessageTitle.vue";
-import MessageDescription from "@/components/message/MessageDescription.vue";
+// import MessageDescription from "@/components/message/MessageDescription.vue";
 
 export default {
   name: "ChatMessage",
@@ -26,22 +42,21 @@ export default {
   components: {
     Avatar,
     MessageTitle,
-    MessageDescription,
   },
   computed: {
-    isAvatar: function() {
-      const user_model = this.message.user.model
-      return user_model.avatarFileId ? true : false
+    isAvatar: function () {
+      const user_model = this.message.user.model;
+      return user_model.avatarFileId ? true : false;
     },
     username: function () {
-      const user_model = this.message.user.model
+      const user_model = this.message.user.model;
       if (user_model.displayName) {
-        return user_model.displayName
+        return user_model.displayName;
       } else {
-        return user_model.userId
+        return user_model.userId;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -51,5 +66,13 @@ export default {
 }
 .card-content {
   padding: 0.2rem 0.75rem;
+}
+
+.media-content {
+  overflow-x: unset !important;
+}
+
+.spaced {
+  padding: 0 1.5rem;
 }
 </style>

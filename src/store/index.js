@@ -4,7 +4,7 @@ import Vuex from "vuex";
 import EkoClient from "eko-sdk";
 
 Vue.use(Vuex);
-const apiKey = "b3bee90c39d9a5644831d84e5a0d1688d100ddebef3c6e78"
+const apiKey = "b3bee90c39d9a5644831d84e5a0d1688d100ddebef3c6e78";
 // const apiKey = process.env.VUE_APP_ASC_APIKEY;
 const client = EkoClient.create({ apiKey });
 
