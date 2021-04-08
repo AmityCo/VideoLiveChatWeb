@@ -1,9 +1,9 @@
 <template>
   <DynamicScroller
+    class="scroller"
     ref="messagelist"
     :items="messages_data"
-    :min-item-size="90"
-    class="scroller"
+    :min-item-size="100"
     key-field="messageId"
   >
     <template v-slot="{ item }">
@@ -15,6 +15,7 @@
 <script>
 import { DynamicScroller } from "vue-virtual-scroller";
 import { MessageRepository } from "eko-sdk";
+
 const messageRepo = new MessageRepository();
 const messages = messageRepo.messagesForChannel({
   channelId: "video-livechat",
@@ -31,7 +32,6 @@ export default {
   data() {
     return {
       messages_data: [],
-      messages_demo: ["A", "B", "C", "D"],
     };
   },
   beforeCreate() {

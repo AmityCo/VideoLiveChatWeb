@@ -40,7 +40,7 @@ export default {
           channelId: this.channel,
           text: this.inputMessages,
         });
-        console.log(messageLiveObject);
+        console.log("createTextMessage: ", messageLiveObject);
         this.inputMessages = null;
       }
     },

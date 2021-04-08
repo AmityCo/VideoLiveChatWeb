@@ -8,23 +8,7 @@
         </div>
         <div class="media-content">
           <message-title :text="username" />
-          <!-- <message-description :text="message.data.text" /> -->
-          <b-tooltip
-            type="is-light"
-            :triggers="['click']"
-            :auto-close="['outside', 'escape']"
-          >
-            <template v-slot:content>
-              <b-icon icon="heart" type="is-danger" />
-              <span style="padding: 0.4rem" />
-              <b-icon icon="thumb-up" type="is-info" />
-              <span style="padding: 0.4rem" />
-              <b-icon icon="thumb-down" type="is-warning" />
-              <span style="padding: 0.4rem" />
-              <b-icon icon="emoticon-cool" />
-            </template>
-            <b-button :label="message.data.text" type="is-light" />
-          </b-tooltip>
+          <message-description :text="message.data.text" />
         </div>
       </div>
     </div>
@@ -34,7 +18,7 @@
 <script>
 import Avatar from "@/components/message/Avatar.vue";
 import MessageTitle from "@/components/message/MessageTitle.vue";
-// import MessageDescription from "@/components/message/MessageDescription.vue";
+import MessageDescription from "@/components/message/MessageDescription.vue";
 
 export default {
   name: "ChatMessage",
@@ -42,6 +26,7 @@ export default {
   components: {
     Avatar,
     MessageTitle,
+    MessageDescription
   },
   computed: {
     isAvatar: function () {
@@ -62,10 +47,12 @@ export default {
 
 <style scoped>
 .card {
+  background-color: transparent;
   box-shadow: none;
 }
+
 .card-content {
-  padding: 0.2rem 0.75rem;
+  padding: 1.6rem 1rem 0 1rem;
 }
 
 .media-content {
