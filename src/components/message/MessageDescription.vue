@@ -10,7 +10,6 @@
       </template>
       <b-message>
         <p class="text">{{ messageModel.data.text }}</p>
-        <span></span>
         <message-reaction :messageReactions="messageModel.myReactions" />
       </b-message>
     </b-tooltip>
@@ -27,21 +26,14 @@ export default {
     MyReactionList,
     MessageReaction,
   },
-  props: ["messageModel"],
-  methods: {
-    reportMessage: function () {
-      alert("Hello !");
-    },
-  },
-  data() {
-    return {
-      active: false,
-    };
-  },
+  props: ["messageModel"]
 };
 </script>
 
 <style scoped>
+#MessageDescription {
+  cursor: pointer;
+}
 .text {
   font-size: 1rem;
   font-weight: 400;

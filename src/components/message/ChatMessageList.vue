@@ -18,7 +18,7 @@
             <chat-message :message="item" />
           </div>
           <div class="card-header-icon" aria-label="more options">
-            <message-options />
+            <message-options :messageModel="item"/>
           </div>
         </header>
       </DynamicScrollerItem>
@@ -47,6 +47,7 @@ export default {
   },
   data() {
     return {
+      isHover: false,
       messages_data: [],
     };
   },
