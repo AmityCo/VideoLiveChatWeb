@@ -8,7 +8,7 @@
         </div>
         <div class="media-content">
           <message-title :text="username" />
-          <message-description :text="message.data.text" />
+          <message-description :messageModel="message" :message_id="message.messageId" :text="message.data.text" />
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@ export default {
 }
 
 .card-content {
-  padding: 1.6rem 1rem 0 1rem;
+  padding: 0.25rem;
 }
 
 .media-content {

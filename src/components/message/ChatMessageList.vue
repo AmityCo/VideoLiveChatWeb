@@ -3,12 +3,33 @@
     class="scroller"
     ref="messagelist"
     :items="messages_data"
-    :min-item-size="100"
+    :min-item-size="128"
     key-field="messageId"
   >
-    <template v-slot="{ item }">
-      <chat-message :message="item" />
+    <template v-slot="{ item, index, active }">
+      <DynamicScrollerItem
+        :item="item"
+        :active="active"
+        :size-dependencies="[item.data.text]"
+        :data-index="index"
+      >
+          <header class="card-header">
+      <div class="card-header-title" style="padding-right: 0px">
+        <chat-message :message="item" />
+      </div>
+      <div
+        class="card-header-icon"
+        aria-label="more options"
+      >
+        <b-icon icon="dots-vertical" />
+      </div>
+    </header>
+      </DynamicScrollerItem>
     </template>
+
+    <!-- <template v-slot="{ item }">
+      <chat-message :message="item" />
+    </template> -->
   </DynamicScroller>
 </template>
 

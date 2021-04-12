@@ -6,23 +6,45 @@
       :auto-close="['outside', 'escape']"
     >
       <template v-slot:content>
-        <reaction-list />
+        <my-reaction-list :messageModel="messageModel" />
       </template>
-      <b-button :label="text" type="is-light" />
+      <b-message>
+        <p class="text"> {{ messageModel.data.text }} </p>
+        <span></span>
+        <message-reaction :messageReactions="messageModel.myReactions" />
+      </b-message>
     </b-tooltip>
   </div>
 </template>
 
 <script>
-import ReactionList from "@/components/reaction/ReactionList.vue";
+import MyReactionList from "@/components/reaction/MyReactionList.vue";
+import MessageReaction from "@/components/reaction/MessageReaction.vue";
 
 export default {
   name: "MessageDescription",
   components: {
-    ReactionList,
+    MyReactionList,
+    MessageReaction,
   },
-  props: ["text"],
+  props: ["messageModel"],
+  methods: {
+    reportMessage: function () {
+      alert("Hello !");
+    },
+  },
+  data() {
+    return {
+      active: false,
+    };
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.text {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+</style>

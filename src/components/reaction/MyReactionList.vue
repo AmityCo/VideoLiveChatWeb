@@ -1,5 +1,5 @@
 <template>
-  <div id="ReactionList">
+  <div id="MyReactionList">
     <div class="block">
       <b-icon
         v-for="reaction in reaction_list"
@@ -7,16 +7,18 @@
         :key="reaction.name"
         :icon="reaction.name"
         :type="reaction.color"
-        @click.native="greet(reaction.name)"
-      >
-      </b-icon>
+        @click.native="reactOnMessage(reaction.name)"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { ReactorRepository } from 'eko-sdk';
+
 export default {
-  name: "ReactionList",
+  name: "MyReactionList",
+  props:["messageModel"],
   data() {
     return {
       reaction_list: [
@@ -28,11 +30,14 @@ export default {
     };
   },
   methods: {
-    greet: function (name) {
-      // `this` inside methods point to the Vue instance
-      alert("Hello " + name + "!");
+    reactOnMessage: function (name) {
+      const reactorRepo = new ReactorRepository(this.messageModel);
+      reactorRepo.addReaction(name)
     },
   },
+  mounted(){
+    
+  }
 };
 </script>
 

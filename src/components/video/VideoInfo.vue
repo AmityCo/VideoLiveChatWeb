@@ -17,7 +17,6 @@
           </p>
         </div>
         <div class="block">
-          <b-icon icon="star-circle"> </b-icon>
           <b-icon class="spaced" icon="share-variant"> </b-icon>
           <b-icon icon="dots-horizontal"> </b-icon>
         </div>
