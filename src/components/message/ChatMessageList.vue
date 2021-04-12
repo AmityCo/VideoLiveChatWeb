@@ -13,12 +13,12 @@
         :size-dependencies="[item.data.text]"
         :data-index="index"
       >
-        <header class="card-header">
+        <header class="card-header chatbox-secondary-bg">
           <div class="card-header-title" style="padding-right: 0px">
             <chat-message :message="item" />
           </div>
           <div class="card-header-icon" aria-label="more options">
-            <message-options :messageModel="item"/>
+            <message-options :messageModel="item" />
           </div>
         </header>
       </DynamicScrollerItem>
@@ -27,13 +27,10 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { DynamicScroller } from "vue-virtual-scroller";
 import { MessageRepository } from "eko-sdk";
-
 const messageRepo = new MessageRepository();
-const messages = messageRepo.messagesForChannel({
-  channelId: "video-livechat",
-});
 
 import ChatMessage from "@/components/message/ChatMessage.vue";
 import MessageOptions from "@/components/message/MessageOptions.vue";
@@ -51,14 +48,18 @@ export default {
       messages_data: [],
     };
   },
-  beforeCreate() {
+  computed: {
+    ...mapState({
+      channel: (state) => state.channel,
+    }),
+  },
+  beforeMount() {
+    const messages = messageRepo.messagesForChannel({
+      channelId: this.channel,
+    });
     messages.on("dataUpdated", (data) => {
       // reload messages table
-      console.log("dataUpdated: ", data);
-
       const filtered = data.filter((msg) => !msg.isDeleted);
-      console.log("filtered: ", filtered);
-
       this.messages_data = filtered.reverse();
       this.$refs.messagelist.scrollToBottom();
     });
@@ -71,6 +72,9 @@ export default {
     });
   },
   beforeDestroy() {
+    const messages = messageRepo.messagesForChannel({
+      channelId: this.channel,
+    });
     // unobserve data changes once you are finished
     messages.removeAllListeners("dataUpdated");
     messages.removeAllListeners("dataError");
@@ -80,6 +84,6 @@ export default {
 
 <style scoped>
 .scroller {
-  height: 65vh;
+  height: 60vh;
 }
 </style>

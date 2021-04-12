@@ -8,7 +8,7 @@
       <template v-slot:content>
         <my-reaction-list :messageModel="messageModel" />
       </template>
-      <b-message>
+      <b-message class="chatbox-secondary-bg">
         <p class="text">{{ messageModel.data.text }}</p>
         <message-reaction :messageReactions="messageModel.myReactions" />
       </b-message>
@@ -26,7 +26,7 @@ export default {
     MyReactionList,
     MessageReaction,
   },
-  props: ["messageModel"]
+  props: ["messageModel"],
 };
 </script>
 

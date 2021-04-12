@@ -4,9 +4,7 @@
       <template #trigger="props">
         <chat-box-header :collapsed="props.open" />
       </template>
-
       <chat-message-list></chat-message-list>
-
       <chat-input />
     </b-collapse>
   </div>
@@ -27,14 +25,10 @@ export default {
     ChatInput,
     ChatMessageList,
   },
-  data() {
-    return {
-      messages: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-    };
-  },
+  props: ["channelId"],
   mounted() {
     const liveChannel = channelRepo.joinChannel({
-      channelId: "video-livechat",
+      channelId: this.channelId,
       type: EkoChannelType.Standard,
     });
     liveChannel.once("dataUpdated", (data) => {
@@ -43,3 +37,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#ChatBox {
+  border: 1px #e0e0e0 solid;
+}
+</style>

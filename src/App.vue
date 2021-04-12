@@ -20,11 +20,21 @@
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
-
 .message-body {
   border-color: transparent !important;
   border-style: none !important;
-  padding: 0.5em 1em !important;
+  padding: 0.1rem 0 !important;
+}
+.chatbox-secondary-bg {
+  background-color: #f9f9f9 !important;
+}
+
+@media (max-width: 767px) {
+  /* <== You can change this break point as per your  needs */
+  .reverse-columns {
+    flex-direction: column-reverse;
+    display: flex;
+  }
 }
 </style>
 

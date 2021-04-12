@@ -1,6 +1,6 @@
 <template>
   <div id="Avatar">
-    <figure class="image is-48x48">
+    <figure class="image is-32x32">
       <img
         class="is-rounded"
         src="https://bulma.io/images/placeholders/96x96.png"

@@ -1,6 +1,6 @@
 <template>
   <div id="MessageTitle">
-    <p class="subtitle is-6 spaced">{{ text }}</p>
+    <p class="title is-6 spaced">{{ text }}</p>
   </div>
 </template>
 

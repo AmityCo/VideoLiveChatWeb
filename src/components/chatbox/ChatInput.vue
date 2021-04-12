@@ -1,15 +1,16 @@
 <template>
   <div id="ChatInput">
     <header class="card-header">
-      <p class="card-header-title" style="padding-right: 0px">
+      <div class="card-header-title">
+        <avatar style="padding-left: 0.5rem; padding-right: 1rem" />
         <b-input
           rounded
           class="expanded"
-          placeholder="Type Your Meassage Here"
+          placeholder="Say Somthing..."
           v-model="inputMessages"
           @keyup.native.enter="submitMessage"
         ></b-input>
-      </p>
+      </div>
       <div
         class="card-header-icon"
         aria-label="more options"
@@ -22,16 +23,26 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { MessageRepository } from "eko-sdk";
 const messageRepo = new MessageRepository();
 
+import Avatar from "@/components/message/Avatar.vue";
+
 export default {
   name: "ChatInput",
+  components: {
+    Avatar,
+  },
   data() {
     return {
-      channel: "video-livechat",
       inputMessages: null,
     };
+  },
+  computed: {
+    ...mapState({
+      channel: (state) => state.channel,
+    }),
   },
   methods: {
     submitMessage: function () {
@@ -51,5 +62,8 @@ export default {
 <style scoped>
 .expanded {
   width: 100%;
+}
+.card-header-title {
+  padding-right: 0px;
 }
 </style>
