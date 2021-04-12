@@ -1,6 +1,24 @@
 <template>
   <b-dropdown
     id="MessageOptions"
+    aria-role="list"
+    position="is-bottom-left"
+    :mobile-modal="false"
+  >
+    <template #trigger>
+      <b-icon icon="dots-vertical" />
+    </template>
+    <b-dropdown-item aria-role="listitem">
+      <div class="media">
+        <b-icon class="media-left" icon="flag" />
+        <div class="media-content">
+          <h3>Report</h3>
+        </div>
+      </div>
+    </b-dropdown-item>
+  </b-dropdown>
+  <!-- <b-dropdown
+    id="MessageOptions"
     :scrollable="true"
     :max-height="60"
     aria-role="list"
@@ -18,7 +36,7 @@
         </div>
       </div>
     </b-dropdown-item>
-  </b-dropdown>
+  </b-dropdown> -->
 </template>
 
 <script>
@@ -28,9 +46,9 @@ export default {
 </script>
 
 <style scoped>
-
 .media {
-    border-top: none;
-    padding-top: 0;
+  border-top: none;
+  padding-top: 0;
 }
-</style>>
+</style>
+>

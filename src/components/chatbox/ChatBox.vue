@@ -38,7 +38,7 @@ export default {
       type: EkoChannelType.Standard,
     });
     liveChannel.once("dataUpdated", (data) => {
-      console.log("joinChannel: ", data)
+      console.log("joinChannel: ", data);
     });
   },
 };

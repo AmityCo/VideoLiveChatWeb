@@ -13,23 +13,16 @@
         :size-dependencies="[item.data.text]"
         :data-index="index"
       >
-          <header class="card-header">
-      <div class="card-header-title" style="padding-right: 0px">
-        <chat-message :message="item" />
-      </div>
-      <div
-        class="card-header-icon"
-        aria-label="more options"
-      >
-        <b-icon icon="dots-vertical" />
-      </div>
-    </header>
+        <header class="card-header">
+          <div class="card-header-title" style="padding-right: 0px">
+            <chat-message :message="item" />
+          </div>
+          <div class="card-header-icon" aria-label="more options">
+            <message-options />
+          </div>
+        </header>
       </DynamicScrollerItem>
     </template>
-
-    <!-- <template v-slot="{ item }">
-      <chat-message :message="item" />
-    </template> -->
   </DynamicScroller>
 </template>
 
@@ -43,11 +36,13 @@ const messages = messageRepo.messagesForChannel({
 });
 
 import ChatMessage from "@/components/message/ChatMessage.vue";
+import MessageOptions from "@/components/message/MessageOptions.vue";
 
 export default {
   name: "ChatMessageList",
   components: {
     ChatMessage,
+    MessageOptions,
     DynamicScroller,
   },
   data() {

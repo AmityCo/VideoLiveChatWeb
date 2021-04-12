@@ -33,8 +33,6 @@ export default {};
 .card {
   padding: 0;
   border-radius: 0.25rem;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .card-content {
   background-color: transparent;

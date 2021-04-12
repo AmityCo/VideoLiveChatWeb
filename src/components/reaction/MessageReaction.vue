@@ -15,10 +15,9 @@
 
 <script>
 export default {
-    name: "MessageReaction",
-    props:["messageReactions"],
+  name: "MessageReaction",
+  props: ["messageReactions"],
 };
 </script>
 
-<style>
-</style>
+<style></style>

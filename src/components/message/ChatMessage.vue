@@ -8,7 +8,11 @@
         </div>
         <div class="media-content">
           <message-title :text="username" />
-          <message-description :messageModel="message" :message_id="message.messageId" :text="message.data.text" />
+          <message-description
+            :messageModel="message"
+            :message_id="message.messageId"
+            :text="message.data.text"
+          />
         </div>
       </div>
     </div>
@@ -26,7 +30,7 @@ export default {
   components: {
     Avatar,
     MessageTitle,
-    MessageDescription
+    MessageDescription,
   },
   computed: {
     isAvatar: function () {
@@ -46,11 +50,6 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  background-color: transparent;
-  box-shadow: none;
-}
-
 .card-content {
   padding: 0.25rem;
 }

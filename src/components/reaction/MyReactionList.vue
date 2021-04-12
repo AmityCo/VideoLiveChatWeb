@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import { ReactorRepository } from 'eko-sdk';
+import { ReactorRepository } from "eko-sdk";
 
 export default {
   name: "MyReactionList",
-  props:["messageModel"],
+  props: ["messageModel"],
   data() {
     return {
       reaction_list: [
@@ -32,12 +32,10 @@ export default {
   methods: {
     reactOnMessage: function (name) {
       const reactorRepo = new ReactorRepository(this.messageModel);
-      reactorRepo.addReaction(name)
+      reactorRepo.addReaction(name);
     },
   },
-  mounted(){
-    
-  }
+  mounted() {},
 };
 </script>
 

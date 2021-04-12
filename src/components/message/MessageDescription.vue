@@ -9,7 +9,7 @@
         <my-reaction-list :messageModel="messageModel" />
       </template>
       <b-message>
-        <p class="text"> {{ messageModel.data.text }} </p>
+        <p class="text">{{ messageModel.data.text }}</p>
         <span></span>
         <message-reaction :messageReactions="messageModel.myReactions" />
       </b-message>
@@ -46,5 +46,4 @@ export default {
   font-size: 1rem;
   font-weight: 400;
 }
-
 </style>
