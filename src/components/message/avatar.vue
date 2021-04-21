@@ -1,19 +1,22 @@
 <template>
   <div id="Avatar">
-    <figure class="image is-32x32">
+    <div v-if="show">
       <img
         class="is-rounded"
         src="https://bulma.io/images/placeholders/96x96.png"
         alt="Placeholder image"
       />
-    </figure>
+    </div>
+    <div v-else>
+      <b-icon icon="account-circle" style="width: 32px; height: 32px" />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Avatar",
-  props: ["image"],
+  props: ["image", "show"],
 };
 </script>
 

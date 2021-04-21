@@ -4,7 +4,7 @@
       <template #trigger="props">
         <chat-box-header :collapsed="props.open" />
       </template>
-      <chat-message-list></chat-message-list>
+      <chat-message-list />
       <chat-input />
     </b-collapse>
   </div>

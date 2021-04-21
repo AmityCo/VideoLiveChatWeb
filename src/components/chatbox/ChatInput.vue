@@ -2,7 +2,7 @@
   <div id="ChatInput">
     <header class="card-header">
       <div class="card-header-title">
-        <avatar style="padding-left: 0.5rem; padding-right: 1rem" />
+        <avatar style="padding-left: 0.4rem; padding-right: 1rem" />
         <b-input
           rounded
           class="expanded"
@@ -60,6 +60,9 @@ export default {
 </script>
 
 <style scoped>
+#ChatInput {
+  background-color: white;
+}
 .expanded {
   width: 100%;
 }

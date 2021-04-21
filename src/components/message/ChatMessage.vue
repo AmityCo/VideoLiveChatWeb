@@ -3,11 +3,10 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <avatar v-if="isAvatar" :image="message" />
-          <avatar v-else />
+          <avatar :show="isAvatar" :image="message" />
         </div>
         <div class="media-content">
-          <message-title :text="username" />
+          <!-- <message-title :text="username" /> -->
           <message-description
             :messageModel="message"
             :message_id="message.messageId"
@@ -21,7 +20,7 @@
 
 <script>
 import Avatar from "@/components/message/Avatar.vue";
-import MessageTitle from "@/components/message/MessageTitle.vue";
+// import MessageTitle from "@/components/message/MessageTitle.vue";
 import MessageDescription from "@/components/message/MessageDescription.vue";
 
 export default {
@@ -29,7 +28,6 @@ export default {
   props: ["message"],
   components: {
     Avatar,
-    MessageTitle,
     MessageDescription,
   },
   computed: {

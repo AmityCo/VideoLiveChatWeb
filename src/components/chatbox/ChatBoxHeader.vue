@@ -2,20 +2,7 @@
   <div id="ChatBoxHeader">
     <div class="card-header" role="button" aria-controls="contentIdForA11y3">
       <div class="chat-header">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img
-                src="https://bulma.io/images/placeholders/96x96.png"
-                alt="Placeholder image"
-              />
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-6">Chat Box</p>
-            <p class="subtitle is-7">10.4k Onliine</p>
-          </div>
-        </div>
+        <p class="title is-6">Live Chat</p>
       </div>
 
       <a class="card-header-icon">
@@ -33,6 +20,10 @@ export default {
 </script>
 
 <style scoped>
+#ChatBoxHeader {
+  border-bottom: 1px #e0e0e0 solid;
+  background-color: white;
+}
 .chat-header {
   -webkit-box-align: center;
   -ms-flex-align: center;

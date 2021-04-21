@@ -13,7 +13,7 @@
         :size-dependencies="[item.data.text]"
         :data-index="index"
       >
-        <header class="card-header chatbox-secondary-bg">
+        <header class="card-header">
           <div class="card-header-title" style="padding-right: 0px">
             <chat-message :message="item" />
           </div>
@@ -44,7 +44,6 @@ export default {
   },
   data() {
     return {
-      isHover: false,
       messages_data: [],
     };
   },

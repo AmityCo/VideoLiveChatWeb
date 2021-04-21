@@ -7,6 +7,7 @@
 
 <style>
 #app {
+  background-color: #f9f9f9;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,8 +26,15 @@
   border-style: none !important;
   padding: 0.1rem 0 !important;
 }
-.chatbox-secondary-bg {
-  background-color: #f9f9f9 !important;
+.media-content {
+  overflow-x: unset !important;
+}
+.transparent-bg {
+  background-color: transparent !important;
+}
+
+hr {
+  margin: 0.5rem 0 !important;
 }
 
 @media (max-width: 767px) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div id="Login">
     <div class="columns is-centered">
       <div class="column is-half">
         <div class="card">
