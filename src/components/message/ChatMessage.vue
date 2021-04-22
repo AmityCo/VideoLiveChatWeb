@@ -31,10 +31,7 @@ export default {
     MessageDescription,
   },
   computed: {
-    isAvatar: function () {
-      const user_model = this.message.user.model;
-      return user_model.avatarFileId ? true : false;
-    },
+    isAvatar: ({ message }) => message?.user?.model?.avatarFileId,
     username: function () {
       const user_model = this.message.user.model;
       if (user_model.displayName) {
