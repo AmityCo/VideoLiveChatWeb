@@ -6,14 +6,14 @@
       :auto-close="['outside', 'escape']"
     >
       <template v-slot:content>
-        <my-reaction-list :messageModel="messageModel" />
+        <my-reaction-list :messageId="messageId" />
       </template>
       <b-message class="transparent-bg">
         <p class="text">
-          <b class="username"> {{ messageModel.user.model.displayName }} </b>
-          {{ messageModel.data.text }}
+          <b class="username"> {{ user.model.displayName }} </b>
+          {{ data.text }}
         </p>
-        <message-reaction :messageReactions="messageModel.myReactions" />
+        <message-reaction :messageReactions="myReactions" />
       </b-message>
     </b-tooltip>
   </div>
@@ -29,7 +29,7 @@ export default {
     MyReactionList,
     MessageReaction,
   },
-  props: ["messageModel"],
+  props: ["messageId", "user", "data", "myReactions"],
 };
 </script>
 

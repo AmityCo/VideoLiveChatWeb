@@ -1,11 +1,7 @@
 <template>
   <div id="Avatar">
     <div v-if="show">
-      <img
-        class="is-rounded"
-        :src="image"
-        alt="Placeholder image"
-      />
+      <img class="is-rounded" :src="image" alt="Placeholder image" />
     </div>
     <div v-else>
       <b-icon icon="account-circle" style="width: 32px; height: 32px" />

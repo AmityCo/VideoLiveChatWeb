@@ -6,12 +6,7 @@
           <avatar :show="isAvatar" :image="message" />
         </div>
         <div class="media-content">
-          <!-- <message-title :text="username" /> -->
-          <message-description
-            :messageModel="message"
-            :message_id="message.messageId"
-            :text="message.data.text"
-          />
+          <message-description v-bind="message" />
         </div>
       </div>
     </div>
@@ -20,7 +15,6 @@
 
 <script>
 import Avatar from "@/components/message/Avatar.vue";
-// import MessageTitle from "@/components/message/MessageTitle.vue";
 import MessageDescription from "@/components/message/MessageDescription.vue";
 
 export default {
@@ -32,9 +26,10 @@ export default {
   },
   computed: {
     isAvatar: ({ message }) => message?.user?.model?.avatarFileId,
-    username: ({ message }) => (
-      message?.user?.model?.displayName ?? message?.user?.model?.userId ?? 'anonymous'
-    ),
+    username: ({ message }) =>
+      message?.user?.model?.displayName ??
+      message?.user?.model?.userId ??
+      "anonymous",
   },
 };
 </script>

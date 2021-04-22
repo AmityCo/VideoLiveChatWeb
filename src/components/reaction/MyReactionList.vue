@@ -15,17 +15,20 @@
 
 <script>
 import { REACTION_LIST } from "@/config";
-import { ReactorRepository } from "eko-sdk";
+import { MessageRepository, ReactorRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
 
 export default {
   name: "MyReactionList",
-  props: ["messageModel"],
+  props: ["messageId"],
   computed: {
     reaction_list: () => REACTION_LIST,
   },
   methods: {
     reactOnMessage(name) {
-      const reactorRepo = new ReactorRepository(this.messageModel);
+      const liveObject = messageRepo.messageForId(this.messageId);
+      const messageModel = liveObject.model;
+      const reactorRepo = new ReactorRepository(messageModel);
       reactorRepo.addReaction(name);
     },
   },
