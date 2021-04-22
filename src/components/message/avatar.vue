@@ -3,7 +3,7 @@
     <div v-if="show">
       <img
         class="is-rounded"
-        src="https://bulma.io/images/placeholders/96x96.png"
+        :src="image"
         alt="Placeholder image"
       />
     </div>
