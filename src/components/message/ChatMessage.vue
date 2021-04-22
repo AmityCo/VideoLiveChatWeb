@@ -3,7 +3,7 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <avatar :show="isAvatar" :image="message" />
+          <avatar v-if="isAvatar" :image="message" />
         </div>
         <div class="media-content">
           <message-description v-bind="message" />
