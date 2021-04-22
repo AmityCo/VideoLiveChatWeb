@@ -28,16 +28,13 @@ export default {
   methods: {
     requestFlagMessage: function () {
       const flagRepo = new MessageFlagRepository(this.messageModel.messageId);
-      if (this.messageModel.flagCount > 0) {
-        if (this.messageModel.isFlaggedByMeCache) {
-          flagRepo.unflag();
-          this.$buefy.snackbar.open("The message was unflagged!");
-          return;
-        }
-      }
-      flagRepo.flag();
-      this.$buefy.snackbar.open("The message was flagged!");
-      return;
+      const flagged = this.messageModel.flagCount > 0 && this.messageModel.isFlaggedByMeCache;
+      const snack = flagged ? "The message was unflagged!" : "The message was flagged!";
+
+      if (flagged) flagRepo.unflag();
+      else flagRepo.flag();
+
+      this.$buefy.snackbar.open(snack);
     },
   },
 };
