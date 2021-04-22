@@ -32,14 +32,9 @@ export default {
   },
   computed: {
     isAvatar: ({ message }) => message?.user?.model?.avatarFileId,
-    username: function () {
-      const user_model = this.message.user.model;
-      if (user_model.displayName) {
-        return user_model.displayName;
-      } else {
-        return user_model.userId;
-      }
-    },
+    username: ({ message }) => (
+      message?.user?.model?.displayName ?? message?.user?.model?.userId ?? 'anonymous'
+    ),
   },
 };
 </script>
