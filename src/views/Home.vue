@@ -23,11 +23,9 @@ export default {
     ChatBox,
     VideoPlayer,
   },
-  data() {
-    return {
-      channel: "video-livechat",
-    };
-  },
+  data: () => ({
+    channel: "video-livechat",
+  }),
   methods: {
     ...mapMutations(["setChannel"]),
   },

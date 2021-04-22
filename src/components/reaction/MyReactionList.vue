@@ -19,16 +19,14 @@ import { ReactorRepository } from "eko-sdk";
 export default {
   name: "MyReactionList",
   props: ["messageModel"],
-  data() {
-    return {
-      reaction_list: [
-        { name: "heart", color: "is-danger" },
-        { name: "thumb-up", color: "is-success" },
-        { name: "thumb-down", color: "is-info" },
-        { name: "emoticon-cool", color: "is-warning" },
-      ],
-    };
-  },
+  data: () => ({
+    reaction_list: [
+      { name: "heart", color: "is-danger" },
+      { name: "thumb-up", color: "is-success" },
+      { name: "thumb-down", color: "is-info" },
+      { name: "emoticon-cool", color: "is-warning" },
+    ],
+  }),
   methods: {
     reactOnMessage: function (name) {
       const reactorRepo = new ReactorRepository(this.messageModel);

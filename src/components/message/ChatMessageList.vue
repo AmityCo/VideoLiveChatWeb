@@ -42,11 +42,9 @@ export default {
     MessageOptions,
     DynamicScroller,
   },
-  data() {
-    return {
-      messages_data: [],
-    };
-  },
+  data: () => ({
+    messages_data: [],
+  }),
   computed: {
     ...mapState({
       channel: (state) => state.channel,

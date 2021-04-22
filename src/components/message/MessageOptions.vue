@@ -28,8 +28,11 @@ export default {
   methods: {
     requestFlagMessage: function () {
       const flagRepo = new MessageFlagRepository(this.messageModel.messageId);
-      const flagged = this.messageModel.flagCount > 0 && this.messageModel.isFlaggedByMeCache;
-      const snack = flagged ? "The message was unflagged!" : "The message was flagged!";
+      const flagged =
+        this.messageModel.flagCount > 0 && this.messageModel.isFlaggedByMeCache;
+      const snack = flagged
+        ? "The message was unflagged!"
+        : "The message was flagged!";
 
       if (flagged) flagRepo.unflag();
       else flagRepo.flag();
