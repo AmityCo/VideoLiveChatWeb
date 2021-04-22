@@ -34,11 +34,9 @@ export default {
   components: {
     Avatar,
   },
-  data() {
-    return {
-      inputMessages: null,
-    };
-  },
+  data: () => ({
+    inputMessages: null,
+  }),
   computed: {
     ...mapState({
       channel: (state) => state.channel,
