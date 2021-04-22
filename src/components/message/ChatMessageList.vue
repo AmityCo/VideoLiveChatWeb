@@ -51,17 +51,17 @@ export default {
     }),
   },
   beforeMount() {
-    const messages = messageRepo.messagesForChannel({
+    this.liveCollection = messageRepo.messagesForChannel({
       channelId: this.channel,
     });
-    messages.on("dataUpdated", (data) => {
+    this.liveCollection.on("dataUpdated", (data) => {
       // reload messages table
       const filtered = data.filter((msg) => !msg.isDeleted);
       this.messages_data = filtered.reverse();
       this.$refs.messagelist.scrollToBottom();
     });
 
-    messages.on("dataError", (error) => {
+    this.liveCollection.on("dataError", (error) => {
       console.log(
         "Message LiveCollections can not query/get/sync data from server",
         error
