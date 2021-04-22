@@ -69,12 +69,9 @@ export default {
     });
   },
   beforeDestroy() {
-    const messages = messageRepo.messagesForChannel({
-      channelId: this.channel,
-    });
     // unobserve data changes once you are finished
-    messages.removeAllListeners("dataUpdated");
-    messages.removeAllListeners("dataError");
+    this.liveCollection.removeAllListeners("dataUpdated");
+    this.liveCollection.removeAllListeners("dataError");
   },
 };
 </script>
