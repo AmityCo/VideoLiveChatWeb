@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     submitMessage() {
-      if (this.inputMessages && this.inputMessages !== "") {
+      if (this.inputMessages?.trim().length) {
         messageRepo.createTextMessage({
           channelId: this.channel,
           text: this.inputMessages,
