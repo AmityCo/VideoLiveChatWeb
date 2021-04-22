@@ -26,7 +26,7 @@ export default {
   name: "MessageOptions",
   props: ["messageModel"],
   methods: {
-    requestFlagMessage: function () {
+    requestFlagMessage() {
       const flagRepo = new MessageFlagRepository(this.messageModel.messageId);
       const flagged =
         this.messageModel.flagCount > 0 && this.messageModel.isFlaggedByMeCache;

@@ -24,7 +24,7 @@ export default {
     reaction_list: () => REACTION_LIST,
   },
   methods: {
-    reactOnMessage: function (name) {
+    reactOnMessage(name) {
       const reactorRepo = new ReactorRepository(this.messageModel);
       reactorRepo.addReaction(name);
     },

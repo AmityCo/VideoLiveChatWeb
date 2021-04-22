@@ -43,7 +43,7 @@ export default {
     }),
   },
   methods: {
-    submitMessage: function () {
+    submitMessage() {
       if (this.inputMessages && this.inputMessages !== "") {
         messageRepo.createTextMessage({
           channelId: this.channel,
