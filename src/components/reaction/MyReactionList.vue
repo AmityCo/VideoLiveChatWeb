@@ -35,7 +35,6 @@ export default {
       reactorRepo.addReaction(name);
     },
   },
-  mounted() {},
 };
 </script>
 
