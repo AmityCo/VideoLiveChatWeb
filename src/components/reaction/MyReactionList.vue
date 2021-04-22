@@ -14,19 +14,15 @@
 </template>
 
 <script>
+import { REACTION_LIST } from "@/config";
 import { ReactorRepository } from "eko-sdk";
 
 export default {
   name: "MyReactionList",
   props: ["messageModel"],
-  data: () => ({
-    reaction_list: [
-      { name: "heart", color: "is-danger" },
-      { name: "thumb-up", color: "is-success" },
-      { name: "thumb-down", color: "is-info" },
-      { name: "emoticon-cool", color: "is-warning" },
-    ],
-  }),
+  computed: {
+    reaction_list: () => REACTION_LIST,
+  },
   methods: {
     reactOnMessage: function (name) {
       const reactorRepo = new ReactorRepository(this.messageModel);
