@@ -10,7 +10,7 @@
       </template>
       <b-message class="transparent-bg">
         <p class="text">
-          <b class="username"> {{ user.model.displayName }} </b>
+          <b class="username"> {{ username }}</b>
           {{ data.text }}
         </p>
         <message-reaction :messageReactions="myReactions" />
@@ -30,6 +30,12 @@ export default {
     MessageReaction,
   },
   props: ["messageId", "user", "data", "myReactions"],
+  computed: {
+    username: ({ user }) =>
+      user?.model?.displayName ??
+      user?.model?.userId ??
+      "anonymous",
+  },
 };
 </script>
 

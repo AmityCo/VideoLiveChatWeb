@@ -2,7 +2,7 @@
   <div id="ChatInput">
     <header class="card-header">
       <div class="card-header-title">
-        <avatar style="padding-left: 0.4rem; padding-right: 1rem" />
+        <avatar class="icon-padding" />
         <b-input
           rounded
           class="expanded"
@@ -59,6 +59,10 @@ export default {
 <style scoped>
 #ChatInput {
   background-color: white;
+}
+.icon-padding{
+  padding-left: 0.4rem; 
+  padding-right: 1rem;
 }
 .expanded {
   width: 100%;

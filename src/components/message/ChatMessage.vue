@@ -3,7 +3,7 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <avatar v-if="isAvatar" :image="message" />
+          <avatar v-bind="message" />
         </div>
         <div class="media-content">
           <message-description v-bind="message" />
@@ -23,13 +23,6 @@ export default {
   components: {
     Avatar,
     MessageDescription,
-  },
-  computed: {
-    isAvatar: ({ message }) => message?.user?.model?.avatarFileId,
-    username: ({ message }) =>
-      message?.user?.model?.displayName ??
-      message?.user?.model?.userId ??
-      "anonymous",
   },
 };
 </script>
