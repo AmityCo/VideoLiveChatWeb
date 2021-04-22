@@ -37,10 +37,6 @@
   </div>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style scoped>
 .card {
   padding: 0;
