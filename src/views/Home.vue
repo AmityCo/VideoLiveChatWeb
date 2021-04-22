@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { CHANNEL_NAME } from "@/config";
 import { mapMutations } from "vuex";
 
 import ChatBox from "@/components/chatbox/ChatBox.vue";
@@ -24,7 +25,7 @@ export default {
     VideoPlayer,
   },
   data: () => ({
-    channel: "video-livechat",
+    channel: CHANNEL_NAME,
   }),
   methods: {
     ...mapMutations(["setChannel"]),
