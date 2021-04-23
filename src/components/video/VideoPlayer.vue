@@ -1,7 +1,7 @@
 <template>
   <div>
     <video width="100%" height="100%" :controls="true" autoplay>
-      <source src="@/assets//our_planet.mp4" type="video/mp4" />
+      <source :src="video_file" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <video-info />
@@ -17,5 +17,8 @@ export default {
   components: {
     VideoInfo,
   },
+  data: () => ({
+    video_file: require("@/assets//our_planet.mp4"),
+  }),
 };
 </script>
