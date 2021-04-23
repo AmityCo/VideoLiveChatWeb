@@ -60,8 +60,8 @@ export default {
 #ChatInput {
   background-color: white;
 }
-.icon-padding{
-  padding-left: 0.4rem; 
+.icon-padding {
+  padding-left: 0.4rem;
   padding-right: 1rem;
 }
 .expanded {
