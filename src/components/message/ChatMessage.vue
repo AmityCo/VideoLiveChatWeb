@@ -3,7 +3,7 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <avatar v-bind="message" />
+          <profile-picture v-bind="message" />
         </div>
         <div class="media-content">
           <message-description v-bind="message" />
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import Avatar from "@/components/message/Avatar.vue";
+import ProfilePicture from "@/components/message/ProfilePicture.vue";
 import MessageDescription from "@/components/message/MessageDescription.vue";
 
 export default {
   name: "ChatMessage",
   props: ["message"],
   components: {
-    Avatar,
+    ProfilePicture,
     MessageDescription,
   },
 };
