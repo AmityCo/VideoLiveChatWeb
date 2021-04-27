@@ -18,7 +18,10 @@
             <chat-message :message="item" />
           </div>
           <div class="card-header-icon" aria-label="more options">
-            <message-options :messageModel="item" />
+            <message-options 
+            :messageModel="item"
+            :lastChild="index == messages_data.length - 1"
+             />
           </div>
         </header>
       </DynamicScrollerItem>
