@@ -2,7 +2,7 @@
   <b-dropdown
     id="MessageOptions"
     aria-role="list"
-    :position="lastChild ? 'is-top-left' : 'is-bottom-left'"
+    position="is-bottom-left"
     :mobile-modal="false"
   >
     <template #trigger>
@@ -24,7 +24,7 @@ import { MessageFlagRepository } from "eko-sdk";
 
 export default {
   name: "MessageOptions",
-  props: ["messageModel", "lastChild"],
+  props: ["messageModel"],
   methods: {
     requestFlagMessage() {
       const flagRepo = new MessageFlagRepository(this.messageModel.messageId);
