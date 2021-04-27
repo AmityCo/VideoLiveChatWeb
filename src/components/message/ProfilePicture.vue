@@ -1,5 +1,5 @@
 <template>
-  <div id="Avatar">
+  <div id="ProfilePicture">
     <figure class="image is-24x24">
       <img
         class="is-rounded"
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "Avatar",
+  name: "ProfilePicture",
   props: ["user"],
   computed: {
     isAvatar: ({ user }) => user?.model?.avatarFileId,
