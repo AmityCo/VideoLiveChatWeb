@@ -20,7 +20,7 @@
           <div class="card-header-icon" aria-label="more options">
             <message-options
               :messageModel="item"
-              :lastChild="index == (messages_data.length-1)"
+              :lastChild="index == messages_data.length - 1"
             />
           </div>
         </header>
