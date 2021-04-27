@@ -2,7 +2,7 @@
   <div id="ChatInput">
     <header class="card-header">
       <div class="card-header-title">
-        <avatar class="icon-padding" />
+        <profile-picture class="icon-padding" />
         <b-input
           rounded
           class="expanded"
@@ -27,12 +27,12 @@ import { mapState } from "vuex";
 import { MessageRepository } from "eko-sdk";
 const messageRepo = new MessageRepository();
 
-import Avatar from "@/components/message/Avatar.vue";
+import ProfilePicture from "@/components/message/ProfilePicture.vue";
 
 export default {
   name: "ChatInput",
   components: {
-    Avatar,
+    ProfilePicture,
   },
   data: () => ({
     inputMessages: null,
