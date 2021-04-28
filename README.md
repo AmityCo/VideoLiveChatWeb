@@ -130,9 +130,9 @@ reactorRepo.addReaction("REACTION_NAME");
 ```
 File: [src/components/reaction/MyReactionList.vue](./src/components/reaction/MyReactionList.vue) 
 
-3. Flag 
+3. Flag on message
 
-Users can flag messages and unflag messages that they have flagged using the MessageFlagRepository class.
+Before flag or unflag the messages, you need to import MessageFlagRepository for using its actions.
 ```
 import { MessageFlagRepository } from 'eko-sdk';
 const flagRepo = new MessageFlagRepository("MESSAGE_ID");
