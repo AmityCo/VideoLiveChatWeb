@@ -34,10 +34,10 @@ npm install eko-sdk —save
 
 Before using the Chat SDK, you will need to create a new SDK instance with your API key (find it via the Admin Panel under setting).
 ```
-import EkoClient from 'eko-sdk';
-const client = new EkoClient({ apiKey: 'YOUR_API_KEY' });
+import EkoClient from "eko-sdk";
+const client = new EkoClient({ apiKey: "YOUR_API_KEY" });
 ```
-File: src/store/index.js
+File: [src/store/index.js](./src/store/index.js)
 
 3. Register Session for your device via User ID
 
@@ -45,11 +45,17 @@ In order to use any Chat SDK feature, you must first register the current device
 ```
 client.registerSession({ userId });
 ```
-File: src/store/index.js
+File: [src/store/index.js](./src/store/index.js)
 
 4. Join the user to channel you want
 
-Before getting the channel message, you need to join user into the channel first. For this demo you can adjust your channelId at variable CHANNEL_NAME in src/config.js
+Before getting the channel message, you need to join user into the channel first. For this demo you can adjust your channelId at variable CHANNEL_NAME in [src/config.js](./src/config.js) 
+
+```
+import { EkoChannelType, ChannelRepository } from "eko-sdk";
+const channelRepo = new ChannelRepository();
+```
+
 ```
 const liveChannel = channelRepo.joinChannel({
   channelId: 'CHANNEL_ID',
@@ -59,11 +65,15 @@ liveChannel.once("dataUpdated", (data) => {
   ...
 });
 ```
-File: src/components/chatbox/ChatBox.vue 
+File: [src/components/chatbox/ChatBox.vue](./src/components/chatbox/ChatBox.vue) 
 
 5. Retrieve messages in the channel
 
 To query for a list of all messages in a channel, you have to call function `messageRepo.messagesForChannel`. Then it will return a LiveCollection of all messages in the specified channel that you can observe the LiveCollection in order to update your view whenever you receive new messages.
+```
+import { MessageRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+```
 ```
 beforeMount() {
   this.liveCollection = messageRepo.messagesForChannel({
@@ -78,7 +88,6 @@ beforeMount() {
   });
 }
 ```
-
 And you need to unobserve data changes once you are finished.
 ```
 beforeDestroy() {
@@ -87,9 +96,54 @@ beforeDestroy() {
   this.liveCollection.removeAllListeners("dataError");
 }
 ```
-File: src/components/chatbox/ChatBox.vue 
+File: [src/components/chatbox/ChatBox.vue](./src/components/chatbox/ChatBox.vue) 
 
 ### Chat message options
-1. Send message
-2. Reaction
+1. Send message to the channel
+
+To create a new messege in channel, you can basically initiate it with the following scripts
+```
+import { MessageRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+```
+```
+const messageLiveObject = messageRepo.createTextMessage({
+  channelId: "CHANNEL_ID",
+  text: "String you want to send",
+});
+```
+File: [src/components/chatbox/ChatInput.vue](./src/components/chatbox/ChatInput.vue) 
+
+2. React on message
+
+In order to make a reaction on message, you need to import MessageRepository for getting message's model since ReactorRepository require it to done the action. 
+```
+import { MessageRepository, ReactorRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+```
+After get the model, pass it in to the react and call for addReaction() and pass along the identifier for your reaction.
+```
+const liveObject = messageRepo.messageForId("MESSAGE_ID");
+const messageModel = liveObject.model;
+const reactorRepo = new ReactorRepository(messageModel);
+reactorRepo.addReaction("REACTION_NAME");
+```
+File: [src/components/reaction/MyReactionList.vue](./src/components/reaction/MyReactionList.vue) 
+
 3. Flag 
+
+Users can flag messages and unflag messages that they have flagged using the MessageFlagRepository class.
+```
+import { MessageFlagRepository } from 'eko-sdk';
+const flagRepo = new MessageFlagRepository("MESSAGE_ID");
+```
+To flag a message, call the following method:
+```
+flagRepo.flag()
+```
+
+To unflag a message, call the following method:
+```
+flagRepo.unflag()
+```
+File: [src/components/message/MessageOptions.vue](./src/components/message/MessageOptions.vue) 
