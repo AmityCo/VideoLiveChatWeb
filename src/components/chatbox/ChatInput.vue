@@ -50,6 +50,7 @@ export default {
           text: this.inputMessages,
         });
         this.inputMessages = null;
+        this.$emit("sent");
       }
     },
   },
