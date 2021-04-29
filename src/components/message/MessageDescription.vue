@@ -4,21 +4,26 @@
       type="is-light"
       :triggers="['click']"
       :auto-close="['outside', 'escape']"
+      :active="active"
     >
       <template v-slot:content>
-        <my-reaction-list :messageId="messageId" />
-      </template>
-      <b-message class="transparent-bg">
-        <p class="text">
-          <b class="username"> {{ username }}</b>
-          {{ data.text }}
-        </p>
-
-        <message-reaction
-          v-if="reactionsCount > 0"
-          :messageReactions="reactions"
+        <my-reaction-list
+          @reacted="actionAfterReacted()"
+          :messageId="messageId"
         />
-      </b-message>
+      </template>
+      <div @click="active = true">
+        <b-message class="transparent-bg">
+          <p class="text">
+            <b class="username"> {{ username }}</b>
+            {{ data.text }}
+          </p>
+          <message-reaction
+            v-if="reactionsCount > 0"
+            :messageReactions="reactions"
+          />
+        </b-message>
+      </div>
     </b-tooltip>
   </div>
 </template>
@@ -41,6 +46,15 @@ export default {
       } else {
         return user?.model?.userId;
       }
+    },
+  },
+  data: () => ({
+    active: false,
+  }),
+  methods: {
+    actionAfterReacted() {
+      console.log("REACTED!!");
+      this.active = false;
     },
   },
 };

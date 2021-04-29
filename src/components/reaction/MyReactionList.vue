@@ -30,6 +30,7 @@ export default {
       const messageModel = liveObject.model;
       const reactorRepo = new ReactorRepository(messageModel);
       reactorRepo.addReaction(name);
+      this.$emit("reacted");
     },
   },
 };
