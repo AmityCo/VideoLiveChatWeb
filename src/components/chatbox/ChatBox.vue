@@ -26,7 +26,7 @@ export default {
     ChatMessageList,
   },
   props: ["channelId"],
-  mounted() {
+  beforeMount() {
     const liveChannel = channelRepo.joinChannel({
       channelId: this.channelId,
       type: EkoChannelType.Standard,
