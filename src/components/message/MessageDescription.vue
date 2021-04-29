@@ -31,8 +31,13 @@ export default {
   },
   props: ["messageId", "user", "data", "myReactions"],
   computed: {
-    username: ({ user }) =>
-      user?.model?.displayName ?? user?.model?.userId ?? "anonymous",
+    username: ({ user }) => {
+      if (user?.model?.displayName && user?.model?.displayName !== "") {
+        return user?.model?.displayName;
+      } else {
+        return user?.model?.userId;
+      }
+    },
   },
 };
 </script>
