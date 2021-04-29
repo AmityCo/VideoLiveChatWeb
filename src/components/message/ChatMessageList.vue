@@ -69,6 +69,15 @@ export default {
         "Message LiveCollections can not query/get/sync data from server",
         error
       );
+      this.$buefy.snackbar.open({
+        message: "error: " + error,
+        type: "is-danger",
+        actionText: "Re-Login",
+        queue: false,
+        onAction: () => {
+          this.$router.push({ name: "Login" });
+        },
+      });
     });
   },
   beforeDestroy() {
