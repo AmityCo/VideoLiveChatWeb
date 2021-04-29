@@ -6,7 +6,7 @@ import EkoClient from "eko-sdk";
 Vue.use(Vuex);
 // const apiKey = process.env.VUE_APP_APIKEY;
 // Hardcode for using with codesandbox
-const apiKey = "b3bee90c39d9a5644831d84e5a0d1688d100ddebef3c6e78";
+const apiKey = "b0ece00b388ff9371d668b1a550e148bd55cddeae83d6e2d";
 const client = EkoClient.create({ apiKey });
 
 export default new Vuex.Store({
