@@ -13,7 +13,11 @@
           <b class="username"> {{ username }}</b>
           {{ data.text }}
         </p>
-        <message-reaction :messageReactions="myReactions" />
+
+        <message-reaction
+          v-if="reactionsCount > 0"
+          :messageReactions="reactions"
+        />
       </b-message>
     </b-tooltip>
   </div>
@@ -29,7 +33,7 @@ export default {
     MyReactionList,
     MessageReaction,
   },
-  props: ["messageId", "user", "data", "myReactions"],
+  props: ["messageId", "user", "data", "reactions", "reactionsCount"],
   computed: {
     username: ({ user }) => {
       if (user?.model?.displayName && user?.model?.displayName !== "") {

@@ -52,6 +52,7 @@ export default {
 .dropdown.is-top-left .dropdown-menu {
   top: -50%;
 }
+
 .dropdown-item {
   padding: 0.2rem 1rem !important;
 }
