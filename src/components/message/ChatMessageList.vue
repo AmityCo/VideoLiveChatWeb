@@ -71,6 +71,7 @@ export default {
       );
       this.$buefy.snackbar.open({
         message: "error: " + error,
+        indefinite: true,
         type: "is-danger",
         actionText: "Re-Login",
         queue: false,
