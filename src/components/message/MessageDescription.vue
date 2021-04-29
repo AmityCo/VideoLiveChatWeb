@@ -53,7 +53,7 @@ export default {
   }),
   methods: {
     actionAfterReacted() {
-      console.log("REACTED!!");
+      // Programatically close the tooltip
       this.active = false;
     },
   },
