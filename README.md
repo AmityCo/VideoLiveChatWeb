@@ -35,8 +35,11 @@ npm install eko-sdk —save
 Before using the Chat SDK, you will need to create a new SDK instance with your API key (find it via the Admin Panel under setting).
 ```
 import EkoClient from "eko-sdk";
-const client = new EkoClient({ apiKey: "YOUR_API_KEY" });
+const apiKey = process.env.VUE_APP_APIKEY;
+const client = EkoClient.create({ apiKey: "YOUR_API_KEY" });
 ```
+Noted: YOUR_API_KEY should be in `.env` file and call through `precess.env`
+
 File: [src/store/index.js](./src/store/index.js)
 
 3. Register Session for your device via User ID
