@@ -5,7 +5,7 @@
 - Amity Chat SDK [Official Document](https://docs2.amity.co/chat/javascript) 
 
 ## Live Demo
-- Try me on [CodeSandBox](https://codesandbox.io/s/github/EkoCommunications/VideoLiveChat/tree/code-review)
+- Try me on [CodeSandBox](https://codesandbox.io/s/github/AmityCo/VideoLiveChatWeb/tree/code-review)
 
 ## How to Run Project Locally
 ### Install all dependencies in package.json
@@ -17,7 +17,7 @@ npm install
 ```
 npm run serve
 ```
-
+Markdown All in One
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
@@ -32,43 +32,33 @@ npm install eko-sdk —save
 
 2. Create new SDK Instance with your API Key
 
-Before using the Chat SDK, you will need to create a new SDK instance with your API key (find it via the Admin Panel under setting). For YOUR_API_KEY show below, it should be in `.env` file and call through `precess.env` more info on [Vue environment variables](https://cli.vuejs.org/guide/mode-and-env.html#environment-variables)
+Before using the Chat SDK, you will need to create a new SDK instance with your API key (find it via the Admin Panel under setting). Navigate to [src/store/index.js](./src/store/index.js) and put in your API key
 ```
-import EkoClient from "eko-sdk";
-const apiKey = process.env.VUE_APP_APIKEY;
-const client = EkoClient.create({ apiKey: "YOUR_API_KEY" });
+const apiKey = "";  // Place your API Key here
+const client = EkoClient.create({ apiKey });
 ```
-File: [src/store/index.js](./src/store/index.js)
+
 
 3. Register Session for your device via User ID
 
-In order to use any Chat SDK feature, you must first register the current device with an userId.
+Register the current device with a userId by passing `userId` parameter into `login` action in [src/store/index.js](./src/store/index.js).
 ```
 client.registerSession({ userId });
 ```
-File: [src/store/index.js](./src/store/index.js)
 
-4. Join the user to channel you want
+4. Implement `ChatBox` component
 
-Before getting the channel message, you need to join user into the channel first. For this demo you can adjust your channelId at variable CHANNEL_NAME in [src/config.js](./src/config.js) 
-
-```
-import { EkoChannelType, ChannelRepository } from "eko-sdk";
-const channelRepo = new ChannelRepository();
-```
+Chatbox UI reisdes within [src/components/chatbox/ChatBox.vue](./src/components/chatbox/ChatBox.vue). To use the component pass in `channelId` as its property as shown in example file [src/views/Home.vue](./src/components/chatbox/ChatBox.vue)
 
 ```
-const liveChannel = channelRepo.joinChannel({
-  channelId: 'CHANNEL_ID',
-  type: EkoChannelType.Standard,
-});
-liveChannel.once("dataUpdated", (data) => {
-  ...
-});
+<div class="column is-4">
+  <chat-box :channelId="channel" />
+</div>
 ```
-File: [src/components/chatbox/ChatBox.vue](./src/components/chatbox/ChatBox.vue) 
 
-5. Retrieve messages in the channel
+### Functionalities detail
+
+1. How to query list of messages
 
 To query for a list of all messages in a channel, you have to call function `messageRepo.messagesForChannel`. Then it will return a LiveCollection of all messages in the specified channel that you can observe the LiveCollection in order to update your view whenever you receive new messages.
 ```
@@ -98,9 +88,7 @@ beforeDestroy() {
 }
 ```
 File: [src/components/chatbox/ChatBox.vue](./src/components/chatbox/ChatBox.vue) 
-
-### Chat message options
-1. Send message to the channel
+2. How to send message to the channel
 
 To create a new messege in channel, you can basically initiate it with the following scripts
 ```
@@ -115,7 +103,7 @@ const messageLiveObject = messageRepo.createTextMessage({
 ```
 File: [src/components/chatbox/ChatInput.vue](./src/components/chatbox/ChatInput.vue) 
 
-2. React on message
+3. How to add reaction on a message
 
 In order to make a reaction on message, you need to import MessageRepository for getting message's model since ReactorRepository require it to done the action. 
 ```
@@ -131,7 +119,7 @@ reactorRepo.addReaction("REACTION_NAME");
 ```
 File: [src/components/reaction/MyReactionList.vue](./src/components/reaction/MyReactionList.vue) 
 
-3. Flag on message
+4. How to flag / unflag a message
 
 Before flag or unflag the messages, you need to import MessageFlagRepository for using its actions.
 ```

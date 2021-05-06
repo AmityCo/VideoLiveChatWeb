@@ -4,7 +4,9 @@ import Vuex from "vuex";
 import EkoClient from "eko-sdk";
 
 Vue.use(Vuex);
-const apiKey = process.env.VUE_APP_APIKEY;
+
+// Place your API Key here
+const apiKey = ""; 
 const client = EkoClient.create({ apiKey });
 
 export default new Vuex.Store({
