@@ -13,7 +13,7 @@
         />
       </template>
       <div @click="active = true">
-        <b-message class="transparent-bg">
+        <b-message type="transparent-bg">
           <p class="text">
             <b class="username"> {{ username }}</b>
             {{ data.text }}
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import MyReactionList from "@/components/reaction/MyReactionList.vue";
-import MessageReaction from "@/components/reaction/MessageReaction.vue";
+import MyReactionList from "@/chatbox/reaction/MyReactionList.vue";
+import MessageReaction from "@/chatbox/reaction/MessageReaction.vue";
 
 export default {
   name: "MessageDescription",
@@ -68,6 +68,7 @@ export default {
   color: #111111;
   font-size: 1rem;
   font-weight: 400;
+  padding-bottom: 0.25rem;
 }
 
 .username {

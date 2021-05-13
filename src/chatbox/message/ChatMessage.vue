@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import ProfilePicture from "@/components/message/ProfilePicture.vue";
-import MessageDescription from "@/components/message/MessageDescription.vue";
+import ProfilePicture from "@/chatbox/message/ProfilePicture.vue";
+import MessageDescription from "@/chatbox/message/MessageDescription.vue";
 
 export default {
   name: "ChatMessage",
