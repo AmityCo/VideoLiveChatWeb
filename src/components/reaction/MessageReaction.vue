@@ -1,13 +1,13 @@
 <template>
   <div id="MessageReaction">
-    <b-taglist v-if="messageReactions.length > 0" attached>
+    <b-taglist attached>
       <b-tag
         rounded
-        v-for="reaction in messageReactions"
-        :key="reaction"
+        v-for="(value, key) in messageReactions"
+        :key="key"
         type="is-light"
       >
-        <b-icon :icon="reaction" size="is-small" />
+        <b-icon :icon="key" size="is-small" /> {{ value }}
       </b-tag>
     </b-taglist>
   </div>

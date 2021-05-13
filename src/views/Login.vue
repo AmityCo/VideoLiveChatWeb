@@ -17,11 +17,6 @@
                 />
               </b-field>
             </div>
-            <b-button
-              :disabled="!username || !password"
-              @click.prevent="onsubmit"
-              >Login</b-button
-            >
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-export const CHANNEL_NAME = "video-livechat";
+export const CHANNEL_NAME = "demo";
 
 export const REACTION_LIST = [
   { name: "heart", color: "is-danger" },

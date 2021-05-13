@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 
 import Buefy from "buefy";
+import "./assets/main.scss";
 
 import VueVirtualScroller from "vue-virtual-scroller";
 import "vue-virtual-scroller/dist/vue-virtual-scroller.css";

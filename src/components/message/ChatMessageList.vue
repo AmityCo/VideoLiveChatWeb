@@ -18,7 +18,10 @@
             <chat-message :message="item" />
           </div>
           <div class="card-header-icon" aria-label="more options">
-            <message-options :messageModel="item" />
+            <message-options
+              :messageModel="item"
+              :lastChild="index == messages_data.length - 1"
+            />
           </div>
         </header>
       </DynamicScrollerItem>
@@ -66,6 +69,16 @@ export default {
         "Message LiveCollections can not query/get/sync data from server",
         error
       );
+      this.$buefy.snackbar.open({
+        message: "error: " + error,
+        indefinite: true,
+        type: "is-danger",
+        actionText: "Re-Login",
+        queue: false,
+        onAction: () => {
+          this.$router.push({ name: "Login" });
+        },
+      });
     });
   },
   beforeDestroy() {

@@ -4,17 +4,26 @@
       type="is-light"
       :triggers="['click']"
       :auto-close="['outside', 'escape']"
+      :active="active"
     >
       <template v-slot:content>
-        <my-reaction-list :messageId="messageId" />
+        <my-reaction-list
+          @reacted="actionAfterReacted()"
+          :messageId="messageId"
+        />
       </template>
-      <b-message class="transparent-bg">
-        <p class="text">
-          <b class="username"> {{ username }}</b>
-          {{ data.text }}
-        </p>
-        <message-reaction :messageReactions="myReactions" />
-      </b-message>
+      <div @click="active = true">
+        <b-message class="transparent-bg">
+          <p class="text">
+            <b class="username"> {{ username }}</b>
+            {{ data.text }}
+          </p>
+          <message-reaction
+            v-if="reactionsCount > 0"
+            :messageReactions="reactions"
+          />
+        </b-message>
+      </div>
     </b-tooltip>
   </div>
 </template>
@@ -29,12 +38,24 @@ export default {
     MyReactionList,
     MessageReaction,
   },
-  props: ["messageId", "user", "data", "myReactions"],
+  props: ["messageId", "user", "data", "reactions", "reactionsCount"],
   computed: {
-    username: ({ user }) =>
-      user?.model?.displayName ??
-      user?.model?.userId ??
-      "anonymous",
+    username: ({ user }) => {
+      if (user?.model?.displayName && user?.model?.displayName !== "") {
+        return user?.model?.displayName;
+      } else {
+        return user?.model?.userId;
+      }
+    },
+  },
+  data: () => ({
+    active: false,
+  }),
+  methods: {
+    actionAfterReacted() {
+      // Programatically close the tooltip
+      this.active = false;
+    },
   },
 };
 </script>

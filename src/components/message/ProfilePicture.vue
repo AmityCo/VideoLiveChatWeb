@@ -1,9 +1,9 @@
 <template>
-  <div id="Avatar">
+  <div id="ProfilePicture">
     <figure class="image is-24x24">
-       <img
+      <img
         class="is-rounded"
-        :src="isAvatar ? user.model.avatarFileId : require('@/assets/avatar_placeholder.svg')"
+        :src="isAvatar ? user.model.avatarFileId : placeholder_img"
         alt="avatar"
       />
     </figure>
@@ -12,10 +12,13 @@
 
 <script>
 export default {
-  name: "Avatar",
+  name: "ProfilePicture",
   props: ["user"],
   computed: {
     isAvatar: ({ user }) => user?.model?.avatarFileId,
   },
+  data: () => ({
+    placeholder_img: require("@/assets/avatar_placeholder.svg"),
+  }),
 };
 </script>
