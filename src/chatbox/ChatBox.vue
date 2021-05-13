@@ -1,7 +1,7 @@
 <template>
   <div id="ChatBox">
     <chat-box-header />
-    <chat-box-message-list :liveObject="liveChannel" :channelId="channelId" />
+    <chat-box-message-list v-if="isJoined" :channelId="channelId" />
     <chat-box-input :channelId="channelId" />
   </div>
 </template>
@@ -26,24 +26,29 @@ export default {
   props: ["api_key", "userId", "channelId"],
   data: () => ({
     current_key: "",
-    liveChannel: {}
+    isJoined: false,
   }),
   watch: {
     current_key: function (val) {
       ClientInstance.init(val);
-      ClientInstance.registerUserSession(this.userId)
+      ClientInstance.registerUserSession(this.userId);
       this.joinUserToChannel(this.channelId, EkoChannelType.Standard);
     },
   },
   methods: {
     joinUserToChannel(channelId, type) {
-      this.liveChannel = channelRepo.joinChannel({
+      const liveChannel = channelRepo.joinChannel({
         channelId,
         type,
       });
-      this.liveChannel.once("dataUpdated", (data) => {
-        console.log("Channel data update: ", data);
-      });
+      if (Object.keys(liveChannel).length > 0) {
+        liveChannel.once("dataUpdated", (data) => {
+          console.log("Channel data update: ", data);
+        });
+        this.isJoined = true;
+      } else {
+        this.isJoined = false;
+      }
     },
   },
   beforeMount() {

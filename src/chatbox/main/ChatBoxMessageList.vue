@@ -44,40 +44,34 @@ export default {
     MessageOptions,
     DynamicScroller,
   },
-  props: ["channelId", "liveObject"],
+  props: ["channelId"],
   data: () => ({
     messages_data: [],
   }),
-  watch: {
-    liveObject: function () {
-      this.getMessagesInChannel()
-    },
-  },
-  methods: {
-    getMessagesInChannel() {
-      this.liveCollection = messageRepo.messagesForChannel({
-        channelId: this.channelId,
+  beforeMount() {
+    this.liveCollection = messageRepo.messagesForChannel({
+      channelId: this.channelId,
+    });
+    this.liveCollection.on("dataUpdated", (data) => {
+      // reload messages table
+      const filtered = data.filter((msg) => !msg.isDeleted);
+      this.messages_data = filtered.reverse();
+      this.$refs.messagelist.scrollToBottom();
+    });
+
+    this.liveCollection.on("dataError", (error) => {
+      console.log(
+        "Message LiveCollections can not query/get/sync data from server",
+        error
+      );
+      this.$buefy.snackbar.open({
+        message: "error: " + error,
+        indefinite: true,
+        type: "is-danger",
+        actionText: "OK",
+        queue: false,
       });
-      this.liveCollection.on("dataUpdated", (data) => {
-        // reload messages table
-        const filtered = data.filter((msg) => !msg.isDeleted);
-        this.messages_data = filtered.reverse();
-        this.$refs.messagelist.scrollToBottom();
-      });
-      this.liveCollection.on("dataError", (error) => {
-        console.log(
-          "Message LiveCollections can not query/get/sync data from server",
-          error
-        );
-        this.$buefy.snackbar.open({
-          message: "error: " + error,
-          indefinite: true,
-          type: "is-danger",
-          actionText: "OK",
-          queue: false,
-        });
-      });
-    },
+    });
   },
   beforeDestroy() {
     // unobserve data changes once you are finished
