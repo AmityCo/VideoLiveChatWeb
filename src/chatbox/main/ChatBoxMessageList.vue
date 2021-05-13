@@ -30,56 +30,54 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { DynamicScroller } from "vue-virtual-scroller";
 import { MessageRepository } from "eko-sdk";
 const messageRepo = new MessageRepository();
 
-import ChatMessage from "@/components/message/ChatMessage.vue";
-import MessageOptions from "@/components/message/MessageOptions.vue";
+import ChatMessage from "@/chatbox/message/ChatMessage.vue";
+import MessageOptions from "@/chatbox/message/MessageOptions.vue";
 
 export default {
-  name: "ChatMessageList",
+  name: "ChatBoxMessageList",
   components: {
     ChatMessage,
     MessageOptions,
     DynamicScroller,
   },
+  props: ["channelId", "liveObject"],
   data: () => ({
     messages_data: [],
   }),
-  computed: {
-    ...mapState({
-      channel: (state) => state.channel,
-    }),
+  watch: {
+    liveObject: function () {
+      this.getMessagesInChannel()
+    },
   },
-  beforeMount() {
-    this.liveCollection = messageRepo.messagesForChannel({
-      channelId: this.channel,
-    });
-    this.liveCollection.on("dataUpdated", (data) => {
-      // reload messages table
-      const filtered = data.filter((msg) => !msg.isDeleted);
-      this.messages_data = filtered.reverse();
-      this.$refs.messagelist.scrollToBottom();
-    });
-
-    this.liveCollection.on("dataError", (error) => {
-      console.log(
-        "Message LiveCollections can not query/get/sync data from server",
-        error
-      );
-      this.$buefy.snackbar.open({
-        message: "error: " + error,
-        indefinite: true,
-        type: "is-danger",
-        actionText: "Re-Login",
-        queue: false,
-        onAction: () => {
-          this.$router.push({ name: "Login" });
-        },
+  methods: {
+    getMessagesInChannel() {
+      this.liveCollection = messageRepo.messagesForChannel({
+        channelId: this.channelId,
       });
-    });
+      this.liveCollection.on("dataUpdated", (data) => {
+        // reload messages table
+        const filtered = data.filter((msg) => !msg.isDeleted);
+        this.messages_data = filtered.reverse();
+        this.$refs.messagelist.scrollToBottom();
+      });
+      this.liveCollection.on("dataError", (error) => {
+        console.log(
+          "Message LiveCollections can not query/get/sync data from server",
+          error
+        );
+        this.$buefy.snackbar.open({
+          message: "error: " + error,
+          indefinite: true,
+          type: "is-danger",
+          actionText: "OK",
+          queue: false,
+        });
+      });
+    },
   },
   beforeDestroy() {
     // unobserve data changes once you are finished

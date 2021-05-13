@@ -16,6 +16,7 @@
         aria-label="more options"
         @click="submitMessage"
       >
+        <!-- Modify string in icon="" to change icon -->
         <b-icon icon="send" />
       </div>
     </header>
@@ -23,11 +24,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import { MessageRepository } from "eko-sdk";
 const messageRepo = new MessageRepository();
 
-import ProfilePicture from "@/components/message/ProfilePicture.vue";
+import ProfilePicture from "@/chatbox/message/ProfilePicture.vue";
 
 export default {
   name: "ChatInput",
@@ -37,16 +37,12 @@ export default {
   data: () => ({
     inputMessages: null,
   }),
-  computed: {
-    ...mapState({
-      channel: (state) => state.channel,
-    }),
-  },
+  props: ["channelId"],
   methods: {
     submitMessage() {
       if (this.inputMessages?.trim().length) {
         messageRepo.createTextMessage({
-          channelId: this.channel,
+          channelId: this.channelId,
           text: this.inputMessages,
         });
         this.inputMessages = null;
@@ -60,6 +56,7 @@ export default {
 <style scoped>
 #ChatInput {
   background-color: white;
+  border-top: 1px #e0e0e0 solid;
 }
 .icon-padding {
   padding-left: 0.4rem;

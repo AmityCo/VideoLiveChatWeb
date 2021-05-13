@@ -1,13 +1,13 @@
 export default [
   {
     path: "/",
-    name: "Home",
-    component: () => import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
-  },
-  {
-    path: "/login",
-    name: "Login",
+    name: "login",
     component: () =>
       import(/* webpackChunkName: "login" */ "@/views/Login.vue"),
+  },
+  {
+    path: "/home/:userId",
+    name: "home",
+    component: () => import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
   },
 ];

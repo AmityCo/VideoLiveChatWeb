@@ -1,13 +1,9 @@
 <template>
   <div id="ChatBoxHeader">
-    <div class="card-header" role="button" aria-controls="contentIdForA11y3">
+    <div class="card-header">
       <div class="chat-header">
         <p class="title is-6">Live Chat</p>
       </div>
-
-      <a class="card-header-icon">
-        <b-icon :icon="collapsed ? 'menu-down' : 'menu-up'"> </b-icon>
-      </a>
     </div>
   </div>
 </template>
