@@ -46,7 +46,7 @@ export default {
 <style>
 .dropdown-menu {
   top: 0;
-  min-width: 1rem;
+  min-width: 1rem !important;
 }
 
 .dropdown.is-top-left .dropdown-menu {
