@@ -25,34 +25,34 @@ export default {
   },
   props: ["api_key", "userId", "channelId"],
   data: () => ({
-    current_key: "",
     isJoined: false,
   }),
   watch: {
-    current_key: function (val) {
-      ClientInstance.init(val);
-      ClientInstance.registerUserSession(this.userId);
-      this.joinUserToChannel(this.channelId, EkoChannelType.Standard);
+    channelId: function (newVal) {
+      this.joinUserToChannel(newVal, EkoChannelType.Standard);
     },
   },
   methods: {
     joinUserToChannel(channelId, type) {
-      const liveChannel = channelRepo.joinChannel({
-        channelId,
-        type,
-      });
-      if (Object.keys(liveChannel).length > 0) {
-        liveChannel.once("dataUpdated", (data) => {
-          console.log("Channel data update: ", data);
-        });
+      console.log("joinUserToChannel");
+      this.isJoined = false;
+      const liveChannel = channelRepo.joinChannel({ channelId, type });
+      const callback = (data) => {
+        console.log("dataUpdated", data);
+      };
+      console.log(liveChannel.model);
+      if (!liveChannel.model) {
         this.isJoined = true;
+        liveChannel.once("dataUpdated", callback);
       } else {
-        this.isJoined = false;
+        callback(liveChannel.model);
       }
     },
   },
   beforeMount() {
-    this.current_key = this.api_key;
+    ClientInstance.init(this.api_key);
+    ClientInstance.registerUserSession(this.userId);
+    this.joinUserToChannel(this.channelId, EkoChannelType.Standard);
   },
 };
 </script>

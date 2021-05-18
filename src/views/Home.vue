@@ -23,13 +23,12 @@ export default {
     ChatBox,
     VideoPlayer,
   },
+  computed: {
+    user: ({ $route }) => $route.params.userId,
+  },
   data: () => ({
-    user: "",
     channel: CHANNEL_NAME,
     api_key: "",
   }),
-  beforeMount() {
-    this.user = this.$route.params.userId;
-  },
 };
 </script>

@@ -2,26 +2,35 @@ import EkoClient from "eko-sdk";
 
 export const ClientInstance = (() => {
   // Private Interface
-  var _client;
-  var _apikey;
+  let _client;
+  let _apikey;
+  let _userId;
+
   function isClientExist() {
-    if ( typeof _client != "undefined") {
+    if (typeof _client != "undefined") {
       return Object.keys(_client).length > 0;
-    } 
-    return false
+    }
+    return false;
   }
 
   // Public Interface
-  return { 
+  return {
     init(key) {
-      if ( !isClientExist() && (_apikey != key) ) {
-        _apikey = key
+      if (!isClientExist() && _apikey !== key) {
+        _apikey = key;
         _client = EkoClient.create({ apiKey: _apikey });
       }
-      return
+      return;
     },
     registerUserSession: function (userId) {
-      _client.registerSession({ userId });
-    }
+      _userId = userId;
+      _client.registerSession({ userId: _userId });
+    },
+    isInitial() {
+      return isClientExist();
+    },
+    getUserID() {
+      return _userId;
+    },
   };
 })();
