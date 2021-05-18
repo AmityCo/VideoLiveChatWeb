@@ -15,8 +15,33 @@
   - userId
   - channelId
 
+Example of implementation in template and script tag
+```
+<template>
+  ...
+  <chat-box :api_key="api_key" :userId="user" :channelId="channel" />
+  ...
+</template>
+```
+
+```
+<script>
+import ChatBox from "@/chatbox/ChatBox.vue";
+
+export default {
+  components: {
+    ChatBox,
+    ...
+  },
+  ...
+};
+</script>
+```
+
 ## ChatBox Folder Structure
 In chatbox folder, It contains many sub-components which will combined together to create the main component ( Chatbox.vue ).
+<img width="444" alt="overall-structure" src="https://user-images.githubusercontent.com/80325355/118606593-d1c7f800-b7e1-11eb-99dd-d02a2f258575.png">
+
 - [main](./src/chatbox/main) : contains whole chatbox UI
 - [message](./src/chatbox/message) : contains UI of each cell of message
 - [reaction](./src/chatbox/reaction): contains UI of bubble reaction when on clicked and reaction list of each message
@@ -24,16 +49,22 @@ In chatbox folder, It contains many sub-components which will combined together 
 
 ## Detail of Each Folder
 #### Main Folder
+<img width="445" alt="structure" src="https://user-images.githubusercontent.com/80325355/118606352-7f86d700-b7e1-11eb-99aa-0fccc2093e56.png">
+
  1. ChatBoxHeader.vue
- 2. ChatBoxMessageList.vue
+ 2. ChatBoxMessageList.vue ( Get All Messages in Channel )
  3. ChatBoxInput.vue
 
 #### Message Folder
+<img width="855" alt="msg-structure" src="https://user-images.githubusercontent.com/80325355/118606650-e1474100-b7e1-11eb-8c52-6f70ffa09a9b.png">
+
  1. ProfilePicture.vue
  2. ChatMessage.vue
  3. MessageDescription.vue
- 4. MessageOptions.vue
+ 4. MessageOptions.vue ( Flag / UnFlag Message )
 
-#### Main Folder
- 1.  MyReactionList.vue
+#### Reaction Folder
+<img width="820" alt="react-structure" src="https://user-images.githubusercontent.com/80325355/118606716-eefcc680-b7e1-11eb-97de-5aa1590c9ddf.png">
+
+ 1.  MyReactionList.vue ( Create Reaction on Message )
  2.  MessageReaction
