@@ -7,6 +7,12 @@
 ## Live Demo
 - Try me on [CodeSandBox](https://codesandbox.io/s/github/AmityCo/VideoLiveChatWeb/tree/code-review)
 
+## How to Add Amity Chat SDK to your project
+Add the SDK to your repository via **npm** or **yarn**
+```
+npm install eko-sdk —save
+```
+
 ## How to Use Chatbox Component
 1. Import & Declare ChatBox.vue to your component that going to use it.
 2. Implement it as a tag in your <template> … </template>. It can declare as either <ChatBox /> or  <chat-box />
@@ -53,19 +59,88 @@ In chatbox folder, It contains many sub-components which will combined together 
 <img width="512" alt="structure" src="https://user-images.githubusercontent.com/80325355/118606352-7f86d700-b7e1-11eb-99aa-0fccc2093e56.png">
 
  1. ChatBoxHeader.vue
- 2. ChatBoxMessageList.vue ( Get All Messages in Channel )
- 3. ChatBoxInput.vue
+ 2. ChatBoxMessageList.vue  **( Get All Messages in Channel )**
 
+> To query all messages in the channel, you need to call function `messageRepo.messagesForChannel`. Then it will return a LiveCollection of all messages in the specified channel that you can observe the LiveCollection. So you can update your screen whenever you receive new messages.
+```
+import { MessageRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+```
+```
+beforeMount() {
+  this.liveCollection = messageRepo.messagesForChannel({
+    channelId: this.channel,
+  });
+  this.liveCollection.on("dataUpdated", (data) => {
+    // called when any updated on channel e.g. new message, new reaction
+  });
+
+  this.liveCollection.on("dataError", (error) => {
+    // called when any error found on channel
+  });
+}
+```
+> And you need to unobserve data changes once you are finished.
+```
+beforeDestroy() {
+  // unobserve data changes once you are finished
+  this.liveCollection.removeAllListeners("dataUpdated");
+  this.liveCollection.removeAllListeners("dataError");
+}
+```
+
+ 3. ChatBoxInput.vue  **( Send Messages to the Channel )**
+
+> To send a new messege in channel, you can basically initiate it with the following scripts
+```
+import { MessageRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+```
+```
+const messageLiveObject = messageRepo.createTextMessage({
+  channelId: "CHANNEL_ID",
+  text: "String you want to send",
+});
+```
+  
 #### Message Folder
 <img width="512" alt="msg-structure" src="https://user-images.githubusercontent.com/80325355/118606650-e1474100-b7e1-11eb-8c52-6f70ffa09a9b.png">
 
  1. ProfilePicture.vue
  2. ChatMessage.vue
  3. MessageDescription.vue
- 4. MessageOptions.vue ( Flag / UnFlag Message )
+ 4. MessageOptions.vue  **( Flag / UnFlag Message )**
+
+> In order to flag or unflag the messages, you need to import MessageFlagRepository for using its actions.
+```
+import { MessageFlagRepository } from 'eko-sdk';
+const flagRepo = new MessageFlagRepository("MESSAGE_ID");
+```
+> To flag a message, call the following method:
+```
+flagRepo.flag()
+```
+
+> To unflag a message, call the following method:
+```
+flagRepo.unflag()
+```
 
 #### Reaction Folder
 <img width="512" alt="react-structure" src="https://user-images.githubusercontent.com/80325355/118606716-eefcc680-b7e1-11eb-97de-5aa1590c9ddf.png">
 
- 1.  MyReactionList.vue ( Create Reaction on Message )
+ 1.  MyReactionList.vue  **( Create Reaction on Message )**
+ 
+> In order to make a reaction on message, you need to import MessageRepository for getting message's model since ReactorRepository require it to done the action. 
+```
+import { MessageRepository, ReactorRepository } from "eko-sdk";
+const messageRepo = new MessageRepository();
+```
+> After get the model, pass it in to the react and call for addReaction() and pass along the identifier for your reaction.
+```
+const liveObject = messageRepo.messageForId("MESSAGE_ID");
+const messageModel = liveObject.model;
+const reactorRepo = new ReactorRepository(messageModel);
+reactorRepo.addReaction("REACTION_NAME");
+```
  2.  MessageReaction
