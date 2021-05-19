@@ -1,11 +1,11 @@
 <template>
-  <div id="MessageReaction">
+  <div id="MessageReaction" :style="css_vars">
     <b-taglist attached>
       <b-tag
         rounded
         v-for="(value, key) in messageReactions"
         :key="key"
-        type="is-light"
+        class="tagstyle"
       >
         <b-icon :icon="key" size="is-small" /> {{ value }}
       </b-tag>
@@ -17,7 +17,22 @@
 export default {
   name: "MessageReaction",
   props: ["messageReactions"],
+  inject: ["chat_color", "font_color"],
+  computed: {
+    css_vars() {
+      return {
+        /* variables you want to pass to css */
+        "--color": this.chat_color,
+        "--font": this.font_color,
+      };
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.tagstyle {
+  background-color: var(--color);
+  color: var(--font);
+}
+</style>

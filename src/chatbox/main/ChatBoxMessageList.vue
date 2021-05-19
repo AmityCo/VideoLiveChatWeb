@@ -1,32 +1,34 @@
 <template>
-  <DynamicScroller
-    class="scroller"
-    ref="messagelist"
-    :items="messages_data"
-    :min-item-size="128"
-    key-field="messageId"
-  >
-    <template v-slot="{ item, index, active }">
-      <DynamicScrollerItem
-        :item="item"
-        :active="active"
-        :size-dependencies="[item.data.text]"
-        :data-index="index"
-      >
-        <header class="card-header">
-          <div class="card-header-title" style="padding-right: 0px">
-            <chat-message :message="item" />
-          </div>
-          <div class="card-header-icon" aria-label="more options">
-            <message-options
-              :messageModel="item"
-              :lastChild="index == messages_data.length - 1"
-            />
-          </div>
-        </header>
-      </DynamicScrollerItem>
-    </template>
-  </DynamicScroller>
+  <div id="ChatBoxMessageList" :style="css_vars">
+    <DynamicScroller
+      class="scroller"
+      ref="messagelist"
+      :items="messages_data"
+      :min-item-size="128"
+      key-field="messageId"
+    >
+      <template v-slot="{ item, index, active }">
+        <DynamicScrollerItem
+          :item="item"
+          :active="active"
+          :size-dependencies="[item.data.text]"
+          :data-index="index"
+        >
+          <header class="card-header">
+            <div class="card-header-title" style="padding-right: 0px">
+              <chat-message :message="item" />
+            </div>
+            <div class="card-header-icon" aria-label="more options">
+              <message-options
+                :messageModel="item"
+                :lastChild="index == messages_data.length - 1"
+              />
+            </div>
+          </header>
+        </DynamicScrollerItem>
+      </template>
+    </DynamicScroller>
+  </div>
 </template>
 
 <script>
@@ -48,6 +50,15 @@ export default {
   data: () => ({
     messages_data: [],
   }),
+  inject: ["chat_color"],
+  computed: {
+    css_vars() {
+      return {
+        /* variables you want to pass to css */
+        "--color": this.chat_color,
+      };
+    },
+  },
   beforeMount() {
     this.liveCollection = messageRepo.messagesForChannel({
       channelId: this.channelId,
@@ -82,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+#ChatBoxMessageList {
+  background-color: var(--color);
+}
 .scroller {
   height: 60vh;
 }

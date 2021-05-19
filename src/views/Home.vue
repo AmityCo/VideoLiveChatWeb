@@ -28,7 +28,7 @@ export default {
   },
   data: () => ({
     channel: CHANNEL_NAME,
-    api_key: "",
+    api_key: "b0ece00b388ff9371d668b1a550e148bd55cddeae83d6e2d",
   }),
 };
 </script>

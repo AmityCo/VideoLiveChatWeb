@@ -1,5 +1,5 @@
 <template>
-  <div id="MessageDescription">
+  <div id="MessageDescription" :style="css_vars">
     <b-tooltip
       type="is-light"
       :triggers="['click']"
@@ -15,7 +15,7 @@
       <div @click="active = true">
         <b-message type="transparent-bg">
           <p class="text">
-            <b class="username"> {{ username }}</b>
+            <b class="username"> {{ username }} </b>
             {{ data.text }}
           </p>
           <message-reaction
@@ -39,6 +39,8 @@ export default {
     MessageReaction,
   },
   props: ["messageId", "user", "data", "reactions", "reactionsCount"],
+  inject: ["font_color"],
+
   computed: {
     username: ({ user }) => {
       if (user?.model?.displayName && user?.model?.displayName !== "") {
@@ -46,6 +48,11 @@ export default {
       } else {
         return user?.model?.userId;
       }
+    },
+    css_vars() {
+      return {
+        "--font": this.font_color,
+      };
     },
   },
   data: () => ({
@@ -64,14 +71,16 @@ export default {
 #MessageDescription {
   cursor: pointer;
 }
+
 .text {
-  color: #111111;
+  color: var(--font);
   font-size: 1rem;
   font-weight: 400;
   padding-bottom: 0.25rem;
 }
 
 .username {
-  color: #11111179;
+  color: var(--font);
+  opacity: 0.75;
 }
 </style>
