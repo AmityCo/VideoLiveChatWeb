@@ -1,8 +1,10 @@
 # Video Live Chat Demo App
 ## Stack Used
-- Vue.js [Official Document](https://vuejs.org/v2/guide/)
-- Buefy for UI Framework [Official Document](https://buefy.org/documentation)
-- Amity Chat SDK [Official Document](https://docs2.amity.co/chat/javascript) 
+| Name | Official Document |
+| :---  | :---  |
+| Vue.js | [link](https://vuejs.org/v2/guide/)|
+| Buefy - UI Framework | [link](https://buefy.org/documentation) |
+| Amity Chat SDK | [link](https://docs2.amity.co/chat/javascript)  |
 
 ## Live Demo
 - Try me on [CodeSandBox](https://codesandbox.io/s/github/AmityCo/VideoLiveChatWeb/tree/code-review)
@@ -49,17 +51,25 @@ In chatbox folder, It contains many sub-components which will combined together 
 
 <img width="512" alt="overall-structure" src="https://user-images.githubusercontent.com/80325355/118606593-d1c7f800-b7e1-11eb-99dd-d02a2f258575.png">
 
-- [main](./src/chatbox/main) : contains whole chatbox UI
-- [message](./src/chatbox/message) : contains UI of each cell of message
-- [reaction](./src/chatbox/reaction): contains UI of bubble reaction when on clicked and reaction list of each message
-- [sdkInstance.js](./src/chatbox/sdkInstance.js): Singleton Class for handling EkoSDK
+| # | Folde Name | Description |
+| --- | :---  | :---  |
+| 1 | [main](./src/chatbox/main) | contains whole chatbox UI |
+| 2 | [message](./src/chatbox/message) | contains UI of each cell of message |
+| 3 | [reaction](./src/chatbox/reaction) | contains UI of bubble reaction when on clicked and reaction list of each message |
+| - | [sdkInstance.js](./src/chatbox/sdkInstance.js) | Singleton Class for handling EkoSDK |
 
 ## Detail of Each Folder
 #### Main Folder
 <img width="512" alt="structure" src="https://user-images.githubusercontent.com/80325355/118606352-7f86d700-b7e1-11eb-99aa-0fccc2093e56.png">
 
- 1. ChatBoxHeader.vue
- 2. ChatBoxMessageList.vue  **( Get All Messages in Channel )**
+| # | File Name | Responsibility |
+| --- | :---  | :---  |
+| 1 | ChatBoxHeader.vue | - |
+| 2 | ChatBoxMessageList.vue | Get All Messages in Channel |
+| 3 | ChatBoxInput.vue | Send Messages to the Channel |
+
+
+**Get All Messages in Channel**
 
 > To query all messages in the channel, you need to call function `messageRepo.messagesForChannel`. Then it will return a LiveCollection of all messages in the specified channel that you can observe the LiveCollection. So you can update your screen whenever you receive new messages.
 ```
@@ -89,7 +99,7 @@ beforeDestroy() {
 }
 ```
 
- 3. ChatBoxInput.vue  **( Send Messages to the Channel )**
+**Send Messages to the Channel**
 
 > To send a new messege in channel, you can basically initiate it with the following scripts
 ```
@@ -106,10 +116,14 @@ const messageLiveObject = messageRepo.createTextMessage({
 #### Message Folder
 <img width="512" alt="msg-structure" src="https://user-images.githubusercontent.com/80325355/118606650-e1474100-b7e1-11eb-8c52-6f70ffa09a9b.png">
 
- 1. ProfilePicture.vue
- 2. ChatMessage.vue
- 3. MessageDescription.vue
- 4. MessageOptions.vue  **( Flag / UnFlag Message )**
+| # | File Name | Responsibility |
+| --- | :---  | :---  |
+| 1 | ProfilePicture.vue | - |
+| 2 | ChatMessage.vue | - |
+| 3 | MessageDescription.vue | - |
+| 3 | MessageOptions.vue | Flag / UnFlag Message |
+
+**Flag / UnFlag Message**
 
 > In order to flag or unflag the messages, you need to import MessageFlagRepository for using its actions.
 ```
@@ -129,7 +143,13 @@ flagRepo.unflag()
 #### Reaction Folder
 <img width="512" alt="react-structure" src="https://user-images.githubusercontent.com/80325355/118606716-eefcc680-b7e1-11eb-97de-5aa1590c9ddf.png">
 
- 1.  MyReactionList.vue  **( Create Reaction on Message )**
+
+| # | File Name | Responsibility |
+| --- | :---  | :---  |
+| 1 | MyReactionList.vue | Create Reaction on Message |
+| 2 | MessageReaction.vue | - |
+
+**Create Reaction on Message**
  
 > In order to make a reaction on message, you need to import MessageRepository for getting message's model since ReactorRepository require it to done the action. 
 ```
@@ -143,4 +163,3 @@ const messageModel = liveObject.model;
 const reactorRepo = new ReactorRepository(messageModel);
 reactorRepo.addReaction("REACTION_NAME");
 ```
- 2.  MessageReaction
