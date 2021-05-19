@@ -1,13 +1,9 @@
 <template>
-  <div id="ChatBoxHeader">
-    <div class="card-header" role="button" aria-controls="contentIdForA11y3">
+  <div id="ChatBoxHeader" :style="css_vars">
+    <div class="card-header">
       <div class="chat-header">
-        <p class="title is-6">Live Chat</p>
+        <p class="title is-6 fontstyle">Live Chat</p>
       </div>
-
-      <a class="card-header-icon">
-        <b-icon :icon="collapsed ? 'menu-down' : 'menu-up'"> </b-icon>
-      </a>
     </div>
   </div>
 </template>
@@ -16,14 +12,28 @@
 export default {
   name: "ChatBoxHeader",
   props: ["collapsed"],
+  inject: ["section_color", "font_color"],
+  computed: {
+    css_vars() {
+      return {
+        "--color": this.section_color,
+        "--font": this.font_color,
+      };
+    },
+  },
 };
 </script>
 
 <style scoped>
 #ChatBoxHeader {
   border-bottom: 1px #e0e0e0 solid;
-  background-color: white;
+  background-color: var(--color);
 }
+
+.fontstyle {
+  color: var(--font);
+}
+
 .chat-header {
   -webkit-box-align: center;
   -ms-flex-align: center;

@@ -5,7 +5,7 @@
         <video-player />
       </div>
       <div class="column is-4">
-        <chat-box :channelId="channel" />
+        <chat-box :api_key="api_key" :userId="user" :channelId="channel" />
       </div>
     </div>
   </div>
@@ -13,9 +13,8 @@
 
 <script>
 import { CHANNEL_NAME } from "@/config";
-import { mapMutations } from "vuex";
 
-import ChatBox from "@/components/chatbox/ChatBox.vue";
+import ChatBox from "@/chatbox/ChatBox.vue";
 import VideoPlayer from "@/components/video/VideoPlayer.vue";
 
 export default {
@@ -24,14 +23,12 @@ export default {
     ChatBox,
     VideoPlayer,
   },
+  computed: {
+    user: ({ $route }) => $route.params.userId,
+  },
   data: () => ({
     channel: CHANNEL_NAME,
+    api_key: "b0ece00b388ff9371d668b1a550e148bd55cddeae83d6e2d",
   }),
-  methods: {
-    ...mapMutations(["setChannel"]),
-  },
-  beforeMount() {
-    this.setChannel(this.channel);
-  },
 };
 </script>

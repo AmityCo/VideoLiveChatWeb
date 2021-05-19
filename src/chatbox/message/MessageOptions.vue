@@ -4,9 +4,10 @@
     aria-role="list"
     :position="lastChild ? 'is-top-left' : 'is-bottom-left'"
     :mobile-modal="false"
+    :style="css_vars"
   >
     <template #trigger>
-      <b-icon icon="dots-vertical" />
+      <b-icon class="fontstyle" icon="dots-vertical" />
     </template>
     <b-dropdown-item aria-role="listitem" @click="requestFlagMessage()">
       <div class="media">
@@ -25,6 +26,15 @@ import { MessageFlagRepository } from "eko-sdk";
 export default {
   name: "MessageOptions",
   props: ["messageModel", "lastChild"],
+  inject: ["font_color"],
+  computed: {
+    css_vars() {
+      return {
+        /* variables you want to pass to css */
+        "--font": this.font_color,
+      };
+    },
+  },
   methods: {
     requestFlagMessage() {
       const flagRepo = new MessageFlagRepository(this.messageModel.messageId);
@@ -44,9 +54,13 @@ export default {
 </script>
 
 <style>
+.fontstyle {
+  color: var(--font);
+}
+
 .dropdown-menu {
   top: 0;
-  min-width: 1rem;
+  min-width: 1rem !important;
 }
 
 .dropdown.is-top-left .dropdown-menu {

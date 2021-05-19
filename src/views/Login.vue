@@ -17,6 +17,9 @@
                 />
               </b-field>
             </div>
+            <b-button type="is-primary" expanded @click="onsubmit">
+              <b> Sign In</b>
+            </b-button>
           </div>
         </div>
       </div>
@@ -32,9 +35,8 @@ export default {
   }),
 
   methods: {
-    async onsubmit() {
-      await this.$store.dispatch("login", this.username);
-      this.$router.push("/");
+    onsubmit() {
+      this.$router.push({ name: "home", params: { userId: this.username } });
     },
   },
 };
