@@ -2,8 +2,8 @@
 ## Table of Contents
 - [Stack Used](#stack-used)
 - [Live Demo](#live-demo)
-- [How to Add Amity Chat SDK to your project](#how-to-add-amity-chat-sdk-to-your-project)
-- [How to Use Chatbox Component](#how-to-use-chatbox-component)
+- [Installing Amity Chat SDK](#installing-amity-chat-sdk)
+- [Using Chatbox Component](#using-chatbox-component)
 - [ChatBox Folder Structure](#chatbox-folder-structure)
 - [Detail of Each Folder](#detail-of-each-folder)
 - [Customization](#customization)
@@ -18,13 +18,19 @@
 ## Live Demo
 - Try me on [CodeSandBox](https://codesandbox.io/s/github/AmityCo/VideoLiveChatWeb/tree/code-review)
 
-## How to Add Amity Chat SDK to your project
-Add the SDK to your repository via **npm** or **yarn**
+## Installing Amity Chat SDK
+Add the SDK to your project via **npm** or **yarn**
+
+Using npm:
 ```
-npm install eko-sdk —save
+$ npm install eko-sdk —save
+```
+Using yarn:
+```
+$ yarn add eko-sdk
 ```
 
-## How to Use Chatbox Component
+## Using Chatbox Component
 1. Import & Declare ChatBox.vue to your component that going to use it.
 2. Implement it as a tag in your <template> … </template>. It can declare as either <ChatBox /> or  <chat-box />
 3. Pass data to the the component via following props 
@@ -62,10 +68,11 @@ In chatbox folder, It contains many sub-components which will combined together 
 
 | # | Folde Name | Description |
 | --- | :---  | :---  |
-| 1 | [main](./src/chatbox/main) | contains whole chatbox UI |
-| 2 | [message](./src/chatbox/message) | contains UI of each cell of message |
-| 3 | [reaction](./src/chatbox/reaction) | contains UI of bubble reaction when on clicked and reaction list of each message |
-| - | [sdkInstance.js](./src/chatbox/sdkInstance.js) | Singleton Class for handling EkoSDK |
+| 1 | [main](./src/chatbox/main) | Contains whole chatbox UI |
+| 2 | [message](./src/chatbox/message) | Contains UI of each cell of message |
+| 3 | [reaction](./src/chatbox/reaction) | Contains UI of bubble reaction when on clicked and reaction list of each message |
+| - | [config.js](./src/chatbox/config.js) | Contains configuration file for UI customization e.g. chatbox background color |
+| - | [sdkInstance.js](./src/chatbox/sdkInstance.js) | Contains singleton class for handling EkoSDK |
 
 ## Detail of Each Folder
 #### Main Folder
@@ -174,4 +181,32 @@ reactorRepo.addReaction("REACTION_NAME");
 ```
 
 ## Customization
+
+ChatBox component allow you to do some UI customization on following list.
+- font_color
+- chat background color
+- chat input background color 
+
+This can be done by setting variables inside ([config.js](./src/chatbox/config.js)) file with CSS color values as below table.
+
+```
+export const CHATBOX_STYLE = {
+  font_color: "#363636", // Black
+  chat_color: "#57de8573", // Green
+  composer_color: "#ffdd57" // Yellow,
+};
+```
+
+| Format | Syntax | Example |
+| :--- | :---  | :---  |
+| Hex Code | #RRGGBB | "#FF0000" |
+| Short Hex Code | #RGB | "#6A7" |
+| RGB % | rgb(rrr%,ggg%,bbb%) | "rgb(50%,50%,50%)" |
+| RGB Absolute | rgb(rrr,ggg,bbb) | "rgb(0,0,255)" |
+| keyword | aqua, black, etc. | "teal" |
+
+Then, you will get the customization chatbox following with your configuration!!  
+<img width="512" alt="Screen Shot 2564-05-20 at 10 21 58" src="https://user-images.githubusercontent.com/80325355/118914517-94847700-b955-11eb-80e4-20451edf368a.png">
+
+
 
