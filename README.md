@@ -1,4 +1,13 @@
 # Video Live Chat Demo App
+## Table of Contents
+- [Stack Used](#stack-used)
+- [Live Demo](#live-demo)
+- [How to Add Amity Chat SDK to your project](#how-to-add-amity-chat-sdk-to-your-project)
+- [How to Use Chatbox Component](#how-to-use-chatbox-component)
+- [ChatBox Folder Structure](#chatbox-folder-structure)
+- [Detail of Each Folder](#detail-of-each-folder)
+- [Customization](#customization)
+
 ## Stack Used
 | Name | Official Document |
 | :---  | :---  |
@@ -163,3 +172,6 @@ const messageModel = liveObject.model;
 const reactorRepo = new ReactorRepository(messageModel);
 reactorRepo.addReaction("REACTION_NAME");
 ```
+
+## Customization
+
