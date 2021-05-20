@@ -26,7 +26,7 @@ export default {
   provide: {
     font_color: CHATBOX_STYLE.font_color,
     chat_color: CHATBOX_STYLE.chat_color,
-    section_color: CHATBOX_STYLE.section_color,
+    composer_color: CHATBOX_STYLE.composer_color,
   },
   props: ["api_key", "userId", "channelId"],
   data: () => ({
