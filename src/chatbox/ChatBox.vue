@@ -59,7 +59,7 @@ export default {
         liveChannel.once("dataUpdated", callback);
         liveChannel.once("dataError", () => {
           if (!this.isFoundMessages) {
-            this.joinUserToChannel(channelId, type);
+            setTimeout(this.joinUserToChannel(channelId, type), 500);
           }
         });
       } else {

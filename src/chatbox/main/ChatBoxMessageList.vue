@@ -70,19 +70,11 @@ export default {
       this.$refs.messagelist.scrollToBottom();
       this.$emit("messages_found");
     });
-
     this.liveCollection.on("dataError", (error) => {
       console.log(
         "Message LiveCollections can not query/get/sync data from server",
         error
       );
-      this.$buefy.snackbar.open({
-        message: "error: " + error,
-        indefinite: true,
-        type: "is-danger",
-        actionText: "OK",
-        queue: false,
-      });
     });
   },
   beforeDestroy() {
