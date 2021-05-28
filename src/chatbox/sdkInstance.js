@@ -1,4 +1,4 @@
-import EkoClient from "eko-sdk";
+import ASCClient from "@amityco/js-sdk";
 
 export const ClientInstance = (() => {
   // Private Interface
@@ -18,7 +18,7 @@ export const ClientInstance = (() => {
     init(key) {
       if (!isClientExist() && _apikey !== key) {
         _apikey = key;
-        _client = EkoClient.create({ apiKey: _apikey });
+        _client = new ASCClient({ apiKey: _apikey });
       }
       return;
     },

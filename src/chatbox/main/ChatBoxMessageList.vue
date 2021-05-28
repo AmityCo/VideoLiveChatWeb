@@ -33,7 +33,7 @@
 
 <script>
 import { DynamicScroller } from "vue-virtual-scroller";
-import { MessageRepository } from "eko-sdk";
+import { MessageRepository } from "@amityco/js-sdk";
 const messageRepo = new MessageRepository();
 
 import ChatMessage from "@/chatbox/message/ChatMessage.vue";
@@ -68,6 +68,7 @@ export default {
       const filtered = data.filter((msg) => !msg.isDeleted);
       this.messages_data = filtered.reverse();
       this.$refs.messagelist.scrollToBottom();
+      this.$emit("messages_found");
     });
 
     this.liveCollection.on("dataError", (error) => {

@@ -15,7 +15,7 @@
 
 <script>
 import { REACTION_LIST } from "@/config";
-import { MessageRepository, ReactorRepository } from "eko-sdk";
+import { MessageRepository, ReactorRepository } from "@amityco/js-sdk";
 const messageRepo = new MessageRepository();
 
 export default {

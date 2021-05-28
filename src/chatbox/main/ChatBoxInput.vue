@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { MessageRepository } from "eko-sdk";
+import { MessageRepository } from "@amityco/js-sdk";
 const messageRepo = new MessageRepository();
 
 import ProfilePicture from "@/chatbox/message/ProfilePicture.vue";

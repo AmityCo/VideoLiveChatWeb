@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { MessageFlagRepository } from "eko-sdk";
+import { MessageFlagRepository } from "@amityco/js-sdk";
 
 export default {
   name: "MessageOptions",

@@ -23,11 +23,7 @@ Add the SDK to your project via **npm** or **yarn**
 
 Using npm:
 ```
-$ npm install eko-sdk —save
-```
-Using yarn:
-```
-$ yarn add eko-sdk
+$ npm install @amityco/js-sdk —save
 ```
 
 ## Using Chatbox Component
@@ -89,7 +85,7 @@ In chatbox folder, It contains many sub-components which will combined together 
 
 > To query all messages in the channel, you need to call function `messageRepo.messagesForChannel`. Then it will return a LiveCollection of all messages in the specified channel that you can observe the LiveCollection. So you can update your screen whenever you receive new messages.
 ```
-import { MessageRepository } from "eko-sdk";
+import { MessageRepository } from "@amityco/js-sdk";
 const messageRepo = new MessageRepository();
 ```
 ```
@@ -119,7 +115,7 @@ beforeDestroy() {
 
 > To send a new messege in channel, you can basically initiate it with the following scripts
 ```
-import { MessageRepository } from "eko-sdk";
+import { MessageRepository } from "@amityco/js-sdk";
 const messageRepo = new MessageRepository();
 ```
 ```
@@ -143,7 +139,7 @@ const messageLiveObject = messageRepo.createTextMessage({
 
 > In order to flag or unflag the messages, you need to import MessageFlagRepository for using its actions.
 ```
-import { MessageFlagRepository } from 'eko-sdk';
+import { MessageFlagRepository } from "@amityco/js-sdk";
 const flagRepo = new MessageFlagRepository("MESSAGE_ID");
 ```
 > To flag a message, call the following method:
@@ -169,7 +165,7 @@ flagRepo.unflag()
  
 > In order to make a reaction on message, you need to import MessageRepository for getting message's model since ReactorRepository require it to done the action. 
 ```
-import { MessageRepository, ReactorRepository } from "eko-sdk";
+import { MessageRepository, ReactorRepository } from "@amityco/js-sdk";
 const messageRepo = new MessageRepository();
 ```
 > After get the model, pass it in to the react and call for addReaction() and pass along the identifier for your reaction.
