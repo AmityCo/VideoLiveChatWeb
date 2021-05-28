@@ -39,12 +39,12 @@ export default {
     inputMessages: null,
   }),
   props: ["channelId"],
-  inject: ["section_color", "font_color"],
+  inject: ["composer_color", "font_color"],
   computed: {
     css_vars() {
       return {
         /* variables you want to pass to css */
-        "--color": this.section_color,
+        "--color": this.composer_color,
         "--font": this.font_color,
       };
     },

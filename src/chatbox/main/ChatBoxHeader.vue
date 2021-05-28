@@ -12,11 +12,11 @@
 export default {
   name: "ChatBoxHeader",
   props: ["collapsed"],
-  inject: ["section_color", "font_color"],
+  inject: ["composer_color", "font_color"],
   computed: {
     css_vars() {
       return {
-        "--color": this.section_color,
+        "--color": this.composer_color,
         "--font": this.font_color,
       };
     },
