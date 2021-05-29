@@ -68,13 +68,12 @@ export default {
       const filtered = data.filter((msg) => !msg.isDeleted);
       this.messages_data = filtered.reverse();
       this.$refs.messagelist.scrollToBottom();
+      console.log("messages_found");
       this.$emit("messages_found");
     });
-    this.liveCollection.on("dataError", (error) => {
-      console.log(
-        "Message LiveCollections can not query/get/sync data from server",
-        error
-      );
+    this.liveCollection.on("dataError", () => {
+      console.log("messages_not_found");
+      this.$emit("messages_not_found");
     });
   },
   beforeDestroy() {

@@ -5,6 +5,7 @@
       v-if="isJoined"
       :channelId="channelId"
       @messages_found="stopJoinChannel()"
+      @@messages_not_found="recallJoinChannel()"
     />
     <chat-box-input :channelId="channelId" />
   </div>
@@ -44,24 +45,30 @@ export default {
   },
   methods: {
     stopJoinChannel() {
+      console.log("stop-joinUserToChannel");
       this.isFoundMessages = true;
     },
+    recallJoinChannel() {
+      if (!this.isFoundMessages) {
+        console.log("recall-joinUserToChannel");
+        setTimeout(
+          this.joinUserToChannel(this.channelId, ChannelType.Standard),
+          500
+        );
+      }
+    },
     joinUserToChannel(channelId, type) {
-      console.log("joinUserToChannel");
+      console.log("start-joinUserToChannel");
       this.isJoined = false;
       const liveChannel = channelRepo.joinChannel({ channelId, type });
       const callback = (data) => {
         this.isJoined = true;
-        console.log("dataUpdated", data);
+        console.log("joinChannel dataUpdated:", data);
       };
       if (!liveChannel.model) {
         this.isJoined = true;
         liveChannel.once("dataUpdated", callback);
-        liveChannel.once("dataError", () => {
-          if (!this.isFoundMessages) {
-            setTimeout(this.joinUserToChannel(channelId, type), 500);
-          }
-        });
+        // liveChannel.once("dataError", ( err ) => console.log(err));
       } else {
         callback(liveChannel.model);
       }
