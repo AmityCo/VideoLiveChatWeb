@@ -60,18 +60,21 @@ export default {
     joinUserToChannel(channelId, type) {
       console.log("start-joinUserToChannel");
       this.isJoined = false;
-      const liveChannel = channelRepo.joinChannel({ channelId, type });
-      const callback = (data) => {
-        this.isJoined = true;
-        console.log("joinChannel dataUpdated:", data);
-      };
-      if (!liveChannel.model) {
-        this.isJoined = true;
-        liveChannel.once("dataUpdated", callback);
-        // liveChannel.once("dataError", ( err ) => console.log(err));
-      } else {
-        callback(liveChannel.model);
-      }
+      channelRepo.joinChannel({ channelId, type });
+      this.isJoined = true;
+
+      // const liveChannel = channelRepo.joinChannel({ channelId, type });
+      // const callback = (data) => {
+      //   this.isJoined = true;
+      //   console.log("joinChannel dataUpdated:", data);
+      // };
+      // if (!liveChannel.model) {
+      //   this.isJoined = true;
+      //   liveChannel.once("dataUpdated", callback);
+      //   // liveChannel.once("dataError", ( err ) => console.log(err));
+      // } else {
+      //   callback(liveChannel.model);
+      // }
     },
   },
   beforeMount() {
