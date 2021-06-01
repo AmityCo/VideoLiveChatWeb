@@ -5,7 +5,7 @@
       v-if="isJoined"
       :channelId="channelId"
       @messages_found="stopJoinChannel()"
-      @@messages_not_found="recallJoinChannel()"
+      @messages_not_found="recallJoinChannel()"
     />
     <chat-box-input :channelId="channelId" />
   </div>
