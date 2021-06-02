@@ -5,7 +5,7 @@
         <video-player />
       </div>
       <div class="column is-4">
-        <chat-box :api_key="api_key" :userId="user" :channelId="channel" />
+        <chat-box :apiKey="apiKey" :userId="user" :channelId="channelId" />
       </div>
     </div>
   </div>
@@ -25,10 +25,9 @@ export default {
   },
   computed: {
     user: ({ $route }) => $route.params.userId,
+
+    apiKey: () => "b0ece00b388ff9371d668b1a550e148bd55cddeae83d6e2d",
+    channelId: () => CHANNEL_NAME,
   },
-  data: () => ({
-    channel: CHANNEL_NAME,
-    api_key: "b0ece00b388ff9371d668b1a550e148bd55cddeae83d6e2d",
-  }),
 };
 </script>
