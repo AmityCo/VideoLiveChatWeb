@@ -1,6 +1,6 @@
 <template>
   <div id="ChatBox">
-    <chat-box-message-list v-if="channel" :channelId="channelId" />
+    <chat-box-message-list v-if="channel" :key="channelId" :channelId="channelId" />
     <chat-box-input :channelId="channelId" />
   </div>
 </template>
@@ -63,8 +63,8 @@ export default {
       });
 
       const callback = (data) => {
-        this.channel = data
-        console.log('the channel has', this.channel.messageCount, 'messages.')
+        this.channel = data;
+        console.log("the channel has", this.channel.messageCount, "messages.");
       };
 
       liveChannel.once("dataUpdated", callback);
@@ -73,12 +73,12 @@ export default {
       liveChannel.once("dataError", async () => {
         // the error indicates that the displayName wasn't set. in that case:
         // 1. just run the setDisplayName method
-        await channelRepo.setDisplayName({ channelId, displayName: channelId })
+        await channelRepo.setDisplayName({ channelId, displayName: channelId });
         // 2. clean the instance
-        liveChannel.dispose()
+        liveChannel.dispose();
         // 3. retry
         this.joinUserToChannel(channelId, type);
-      })
+      });
     },
   },
 };
