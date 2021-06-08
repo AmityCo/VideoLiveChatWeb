@@ -63,7 +63,7 @@ export default {
     this.liveCollection = messageRepo.messagesForChannel({
       channelId: this.channelId,
     });
-    
+
     this.liveCollection.on("dataUpdated", (data) => {
       // reload messages table
       const filtered = data.filter((msg) => !msg.isDeleted);
@@ -74,7 +74,7 @@ export default {
     });
 
     this.liveCollection.on("dataError", (error) => {
-      console.log('The message live collection encountered an error', error)
+      console.log("The message live collection encountered an error", error);
     });
   },
   beforeDestroy() {

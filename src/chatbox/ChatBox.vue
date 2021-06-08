@@ -1,6 +1,10 @@
 <template>
   <div id="ChatBox">
-    <chat-box-message-list v-if="channel" :key="channelId" :channelId="channelId" />
+    <chat-box-message-list
+      v-if="isJoined"
+      :key="channelId"
+      :channelId="channelId"
+    />
     <chat-box-input :channelId="channelId" />
   </div>
 </template>
@@ -11,8 +15,11 @@ import ChatBoxMessageList from "@/chatbox/main/ChatBoxMessageList.vue";
 
 import { ClientInstance } from "@/chatbox/sdkInstance";
 
-import { ChannelType, ChannelRepository } from "@amityco/js-sdk";
-const channelRepo = new ChannelRepository();
+import {
+  ChannelType,
+  ChannelRepository,
+  ChannelMembershipRepository,
+} from "@amityco/js-sdk";
 
 import { CHATBOX_STYLE } from "@/chatbox/config";
 
@@ -55,29 +62,20 @@ export default {
 
   methods: {
     joinUserToChannel(channelId, type = ChannelType.Standard) {
-      this.channel = null;
+      const channelUser = new ChannelMembershipRepository(channelId);
 
-      const liveChannel = channelRepo.joinChannel({
-        channelId,
-        type,
-      });
+      this.membership = channelUser.myMembership;
 
-      const callback = (data) => {
-        this.channel = data;
-        console.log("the channel has", this.channel.messageCount, "messages.");
+      const callback = (model) => {
+        this.isJoined = model.membership = "member";
       };
 
-      liveChannel.once("dataUpdated", callback);
-      liveChannel.model && callback(liveChannel.model);
+      this.membership.on("dataUpdated", callback);
+      this.membership.model && callback(this.liveObject.model);
 
-      liveChannel.once("dataError", async () => {
-        // the error indicates that the displayName wasn't set. in that case:
-        // 1. just run the setDisplayName method
-        await channelRepo.setDisplayName({ channelId, displayName: channelId });
-        // 2. clean the instance
-        liveChannel.dispose();
-        // 3. retry
-        this.joinUserToChannel(channelId, type);
+      new ChannelRepository().joinChannel({
+        channelId,
+        type,
       });
     },
   },
